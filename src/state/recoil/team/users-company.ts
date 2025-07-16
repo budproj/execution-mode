@@ -10,7 +10,7 @@ export const usersCompany = atom<User[]>({
 
 export const filteredUsersCompany = (teamId: Team['id']) => {
   return selector<User[]>({
-    key: 'filteredUsersCompany',
+    key: `filteredUsersCompany/${teamId}`,
     get: ({ get }) => {
       const users = get(usersCompany)
 

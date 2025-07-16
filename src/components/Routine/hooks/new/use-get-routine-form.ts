@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { FormQuestion } from 'src/components/Routine/Drawer/Questions/types'
 import {
   routineFormQuestions,
   retrospectiveRoutineSelector,
@@ -16,11 +15,10 @@ export const useRoutineFormQuestions = () => {
   const intl = useIntl()
 
   const useLocaleFormated = intl.locale === 'en-US' ? 'en' : intl.locale.toLocaleLowerCase()
-  const requestFormQuestionsPath = `bud-form?intl=${useLocaleFormated}`
 
   const getRoutineQuestions = async () => {
     const { routines } = await servicesPromise
-    const { data } = await routines.get<{ questions: FormQuestion[] }>(requestFormQuestionsPath)
+    const data = await routines.getRoutineForm(useLocaleFormated)
 
     if (data?.questions) {
       const mappedQuestions = data.questions.map((question) => ({

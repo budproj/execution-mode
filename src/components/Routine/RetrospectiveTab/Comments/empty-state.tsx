@@ -2,7 +2,7 @@ import { Box, Image, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { AnswerType } from '../retrospective-tab-content'
+import { AnswerType } from '../types'
 
 import messages from './messages'
 

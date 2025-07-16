@@ -24,11 +24,9 @@ import {
 import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 
-import { OverviewData } from '../../RetrospectiveTab/RoutinesOverview'
-import { usePendingRoutines } from '../getPendingRoutine'
-import { useFetchSummaryData } from '../useFetchSummaryData'
-
-import submitAnswersMessages from './messages'
+import submitAnswersMessages from '../messages'
+import useGetAnswers from '../new/use-get-answers'
+import { usePendingRoutines } from '../new/use-get-pending-routines'
 
 export const useRoutineFormAnswers = () => {
   const setUserTeams = useSetRecoilState(routineAnswersReturnedData)
@@ -56,7 +54,7 @@ export const useRoutineFormAnswers = () => {
   const [answersSummary, setAnswerSummary] = useRecoilState(answerSummaryAtom)
   const { after, before } = useRecoilValue(routineDatesRangeAtom)
   const setRoutineOverviewData = useSetRecoilState(overviewDataAtom)
-  const { fetchAnswers } = useFetchSummaryData()
+  const { getAnswers } = useGetAnswers()
 
   const refetchRoutineData = async (teamId: Team['id']) => {
     setIsAnswerSummaryLoading(true)
@@ -65,7 +63,7 @@ export const useRoutineFormAnswers = () => {
     setAnswerSummary([])
     const { routines } = await servicesPromise
 
-    const formattedData = await fetchAnswers({
+    const formattedData = await getAnswers({
       teamId,
       after,
       before,
@@ -75,12 +73,7 @@ export const useRoutineFormAnswers = () => {
     if (formattedData) setAnswerSummary(formattedData)
     setIsAnswerSummaryLoading(false)
 
-    const { data: answersOverview } = await routines.get<OverviewData>(
-      `/answers/overview/${teamId}`,
-      {
-        params: { includeSubteams: false },
-      },
-    )
+    const answersOverview = await routines.getAnswerOverview(teamId)
     if (answersOverview) setRoutineOverviewData(answersOverview)
     await getPendingRoutines()
   }
@@ -130,7 +123,7 @@ export const useRoutineFormAnswers = () => {
       if (hiddenElement) answersThatShouldBeHidden.push(answer)
     }
 
-    const { data: userTeams } = await routines.post<Team[]>('/answer', [
+    const userTeams = await routines.createAnswer([
       ...answers.filter((answer) => !answersThatShouldBeHidden.includes(answer)),
       ...mappedHiddenAnswers,
     ])

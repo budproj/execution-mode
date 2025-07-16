@@ -1,5 +1,6 @@
 import { Flex, Text, VStack, Avatar, Button, HStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import { useQueryClient } from '@tanstack/react-query'
 import React, { useMemo, useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -8,21 +9,17 @@ import regexifyString from 'regexify-string'
 import { ConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/Base/wrapper'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
 import { useGetUserDetails } from 'src/components/User/hooks'
 import { User } from 'src/components/User/types'
 import { commentInputInitialValue } from 'src/state/recoil/comments/input'
 import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
 import meAtom from 'src/state/recoil/user/me'
 
-import { COMMENT_DOMAIN } from '../../Answers/utils/constants'
-import { AnswerType } from '../../retrospective-tab-content'
 import { Comment } from '../types'
 
 import messages from './messages'
 
 interface CommentCard {
-  answerId: AnswerType['id']
   userId: User['id']
   id: Comment['id']
   timestamp: Date
@@ -54,26 +51,16 @@ export const insertMentionInString = (comment: string) => {
   })
 }
 
-const CommentCard = ({
-  answerId,
-  id,
-  userId,
-  timestamp,
-  comment,
-  entity,
-  isDeleted,
-}: CommentCard) => {
+const CommentCard = ({ id, userId, timestamp, comment, entity, isDeleted }: CommentCard) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const { servicesPromise } = useContext(ServicesContext)
-
-  const origin_entity = `${COMMENT_DOMAIN.routine}:${answerId}`
+  const queryClient = useQueryClient()
 
   const logged_user = useRecoilValue(meAtom)
 
   const { data: user } = useGetUserDetails(userId)
   const setCommentInputValue = useSetRecoilState(commentInputInitialValue)
   const setCommentEntityToReply = useSetRecoilState(commentEntityToReply)
-  const { refatch } = useGetCommentsByEntity()
 
   const intl = useIntl()
 
@@ -99,7 +86,7 @@ const CommentCard = ({
       console.error(error)
       return { data: undefined }
     })
-    refatch({ entity: origin_entity })
+    queryClient.invalidateQueries({ queryKey: [`routines:getCommentsByEntity`] })
   }
 
   const handleReplyComment = () => {

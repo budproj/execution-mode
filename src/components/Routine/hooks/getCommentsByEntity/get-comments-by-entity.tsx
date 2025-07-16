@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
 import { useRecoilState } from 'recoil'
 
@@ -25,4 +26,21 @@ export const useGetCommentsByEntity = () => {
   }
 
   return { getCommentsByEntity, comments, refatch }
+}
+
+export const useGetCommentsByEntityMutation = ({ entity }: { entity?: Comment['entity'] }) => {
+  const { servicesPromise } = useContext(ServicesContext)
+
+  const query = useQuery({
+    queryKey: [`routines:getCommentsByEntity`, entity],
+    queryFn: async () => {
+      if (!entity) return
+      const { comments } = await servicesPromise
+
+      const { data } = await comments.get<Comment[]>(`/comments/${entity}`)
+      return data
+    },
+  })
+
+  return query
 }

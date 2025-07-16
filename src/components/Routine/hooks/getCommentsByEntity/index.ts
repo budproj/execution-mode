@@ -1,1 +1,1 @@
-export { useGetCommentsByEntity } from './get-comments-by-entity'
+export { useGetCommentsByEntity, useGetCommentsByEntityMutation } from './get-comments-by-entity'

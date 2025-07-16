@@ -1,7 +1,7 @@
 import React, { createContext, ReactElement, useContext } from 'react'
 import { useRecoilState } from 'recoil'
 
-import { useRoutineFormAnswers } from 'src/components/Routine/hooks/setRoutineFormAnswers/set-routine-form-answers'
+import { useRoutineFormAnswers } from 'src/components/Routine/hooks/new/use-routine-form-answer'
 import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 

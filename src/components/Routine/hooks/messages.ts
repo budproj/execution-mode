@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type deleteRoutineAnswerMessages = 'successDeleteToastMessage' | 'warningDeleteToastMessage'
+type deleteRoutineAnswerMessages =
+  | 'successDeleteToastMessage'
+  | 'warningDeleteToastMessage'
+  | 'aRequiredQuestionHasNotBeenAnswered'
 
 export default defineMessages<deleteRoutineAnswerMessages>({
   successDeleteToastMessage: {
@@ -14,5 +17,10 @@ export default defineMessages<deleteRoutineAnswerMessages>({
     id: 'uxjg0W',
     description:
       'This message appears in a toast indicating that it was not possible to delete a routines response.',
+  },
+  aRequiredQuestionHasNotBeenAnswered: {
+    defaultMessage: 'Essa pergunta é obrigatória!',
+    id: '1lccXL',
+    description: 'This message appears to indicate that a required question has not been answered.',
   },
 })

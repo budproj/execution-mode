@@ -10,6 +10,6 @@ export const postCreateTeamSettings = () => {
   return async (companyId: Team['id']) => {
     const { routines } = await servicesPromise
 
-    await routines.post(`/settings/${companyId}`, {})
+    await routines.createCompanySettings(companyId)
   }
 }

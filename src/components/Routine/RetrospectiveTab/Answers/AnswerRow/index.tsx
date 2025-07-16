@@ -11,9 +11,8 @@ import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
-import { AnswerSummary } from '../retrospective-tab-content'
-
-import messages from './messages'
+import { AnswerSummary } from '../../types'
+import messages from '../messages'
 
 interface AnswerRowComponentProperties {
   answer: AnswerSummary
@@ -21,8 +20,10 @@ interface AnswerRowComponentProperties {
 
 const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
-  const { dispatch } = useEvent(EventType.ROUTINE_ANSWER_ROW_CLICK)
   const router = useRouter()
+
+  const { dispatch } = useEvent(EventType.ROUTINE_ANSWER_ROW_CLICK)
+
   const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp ?? ''))
 
   const isTheDateToday = answer.timestamp ? isToday(new Date(answer.timestamp)) : undefined

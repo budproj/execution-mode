@@ -1,1 +1,1 @@
-export { getRoutinesInstance } from './routines-instance'
+export { getRoutinesInstance } from './routines.instance'

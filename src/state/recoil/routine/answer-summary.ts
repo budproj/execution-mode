@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-import { AnswerSummary } from 'src/components/Routine/RetrospectiveTab/retrospective-tab-content'
+import { AnswerSummary } from 'src/components/Routine/RetrospectiveTab/types'
 
 import { PREFIX } from './constants'
 

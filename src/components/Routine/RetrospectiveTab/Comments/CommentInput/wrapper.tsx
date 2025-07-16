@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react'
+import { useQueryClient } from '@tanstack/react-query'
 import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
 import { useRecoilState } from 'recoil'
@@ -30,6 +31,7 @@ const RoutineCommentsInput = ({
   routineUser,
   showLastComment,
 }: RoutineCommentInputProperties) => {
+  const queryClient = useQueryClient()
   const { handleCreateComment } = useCreateComment()
   const [inputInitialValues, setInputInitialValues] = useRecoilState(commentInputInitialValue)
   const [commentEntity, setCommentEntity] = useRecoilState(commentEntityToReply)
@@ -60,6 +62,7 @@ const RoutineCommentsInput = ({
       showLastComment()
       actions.setSubmitting(false)
       actions.resetForm()
+      queryClient.invalidateQueries({ queryKey: [`routines:getCommentsByEntity`] })
     } else {
       toast({
         title: 'Escreva algo para comentar!',

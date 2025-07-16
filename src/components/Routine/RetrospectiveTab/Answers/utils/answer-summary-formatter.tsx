@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 import { User } from 'src/components/User/types'
 import { usersCompany } from 'src/state/recoil/team/users-company'
 
-import { AnswerSummary } from '../../retrospective-tab-content'
+import { AnswerSummary } from '../../types'
 
 type AnswerSummaryFormmaterData = {
   requestedUsersIDs: Array<User['id']>

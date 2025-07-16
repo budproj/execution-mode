@@ -24,10 +24,7 @@ export const useGetUserLastRetrospectiveAnswerOverview = (userId: User['id']) =>
       const { routines } = await servicesPromise
       try {
         setIsLoaded(false)
-        const { data: routineData } =
-          await routines.get<UserRetrospectiveAnswerOverviewDataProperties>(
-            `/answers/overview/user/${userId}`,
-          )
+        const routineData = await routines.getAnswerOverviewFromUser(userId)
 
         if (routineData) setUserRoutineData({ ...routineData, userId })
       } catch (error: unknown) {

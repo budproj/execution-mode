@@ -8,7 +8,7 @@ import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/
 import RoutineDrawer from '../Drawer/Base/drawer'
 import RoutineFormQuestion from '../Drawer/Questions'
 import { FormQuestion } from '../Drawer/Questions/types'
-import { useRoutineFormQuestions } from '../hooks/getRoutineForm/get-routine-form'
+import { useRoutineFormQuestions } from '../hooks/new/use-get-routine-form'
 
 const updateDependQuestions = (questionId: string, value: string) => (question: FormQuestion) => {
   if (question.conditional?.dependsOn !== questionId) {
