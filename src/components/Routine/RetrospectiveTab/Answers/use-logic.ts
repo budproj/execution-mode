@@ -130,9 +130,7 @@ export function useLogic({
       (answer) => answer.userId === userID && answer.timestamp,
     )
 
-    setShowAnswerNowButton(
-      Boolean(isUserFromTeam && isActiveRoutine && !haveUserAnswered && dataAnswers?.length > 0),
-    )
+    setShowAnswerNowButton(Boolean(isUserFromTeam && isActiveRoutine && !haveUserAnswered))
     setFilteredAnswers(reorderAnswers(dataAnswers))
     handleSearch(search)
     // eslint-disable-next-line react-hooks/exhaustive-deps
