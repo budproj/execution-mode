@@ -3,17 +3,14 @@ import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 
-const MODULE = 'KeyResult'
-const ACTION = 'getAllTeamKR'
-
-export function useTeamKRData(teamId: string) {
+export function useGetTeamCyclesDate(teamId: string) {
   const { servicesPromise } = useContext(ServicesContext)
 
   const query = useQuery({
-    queryKey: [`${MODULE}:${ACTION}:${teamId}`],
+    queryKey: [`taskManager:getTeamCycles:${teamId}`],
     queryFn: async () => {
-      const { keyResult } = await servicesPromise
-      const data = await keyResult.getKeyResultTeam(teamId)
+      const { cycle } = await servicesPromise
+      const data = await cycle.getTeamCyclesDate(teamId)
       return data
     },
   })
