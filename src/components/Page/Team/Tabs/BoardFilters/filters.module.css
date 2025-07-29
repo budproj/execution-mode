@@ -27,7 +27,7 @@
   border-radius: 4px;
   transition: 300ms;
   box-shadow: 0px 5px 10px 5px #B5C0DB1A;
-  z-index: 99;
+  z-index: 9;
 }
 
 .modal_inner_button {
