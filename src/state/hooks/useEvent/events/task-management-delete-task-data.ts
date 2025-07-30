@@ -1,4 +1,4 @@
-import { TASK_STATUS } from 'src/services/task-management/task-management.service'
+import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
 
 import { BaseEventData } from './base-event'
 

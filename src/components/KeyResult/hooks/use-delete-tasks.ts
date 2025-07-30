@@ -8,8 +8,8 @@ export const useDeleteTaskByKr = () => {
 
   return useMutation({
     mutationFn: async ({ taskID }: { taskID: string }) => {
-      const { newTaskManagement } = await servicesPromise
-      return newTaskManagement.removeTask(taskID)
+      const { taskManagement } = await servicesPromise
+      return taskManagement.removeTask(taskID)
     },
   })
 }

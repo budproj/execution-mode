@@ -2,8 +2,8 @@ import { EditorEvents } from '@tiptap/react'
 import React, { useCallback, useState } from 'react'
 
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
-import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { TaskUpdate } from 'src/services/task-management/@types/task-update.type'
+import { Task } from 'src/services/task-management/@types/task.type'
 
 interface TaskDescriptionSectionProperties {
   task: Task

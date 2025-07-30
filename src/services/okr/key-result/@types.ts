@@ -1,6 +1,6 @@
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { Except } from 'src/helpers/except'
-import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
 
 enum KeyResultFormat {
   NUMBER = 'NUMBER',

@@ -37,11 +37,13 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
   useEffect(() => {
     if (
       router.query.key_result_id__id ||
+      router.query.cy ||
       router.query.cy !== `${defaultCycle.year}+${defaultCycle.quarter}` ||
       router.query.show_done
     ) {
       setResetFilters(true)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query])
 
   useEffect(() => {

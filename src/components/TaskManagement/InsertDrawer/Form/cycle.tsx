@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 import SelectMenu from '../../../Base/SelectMenu'
-import { useGetTeamCycles } from '../../hooks/new-task/use-get-team-cycles'
+import { useGetTeamCycles } from '../../hooks/use-get-team-cycles'
 
 import { FormInputBase } from './base-input'
 import { FormValues } from './wrapper'
