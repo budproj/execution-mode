@@ -12,8 +12,8 @@ export const useDeleteTask = () => {
 
   return useMutation({
     mutationFn: async ({ taskId }: { taskId: string }) => {
-      const { newTaskManagement } = await servicesPromise
-      return newTaskManagement.removeTask(taskId)
+      const { taskManagement } = await servicesPromise
+      return taskManagement.removeTask(taskId)
     },
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.taskId}`] })

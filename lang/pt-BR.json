@@ -1291,6 +1291,10 @@
     "defaultMessage": "para <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
   },
+  "IldkUk": {
+    "defaultMessage": "Filtros",
+    "description": "This is the default placeholder while selecting a given value in a select menu"
+  },
   "IoZbDV": {
     "defaultMessage": "Deseja excluir esse comentário?",
     "description": "This message appears in delete modal confirmation."

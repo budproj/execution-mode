@@ -9,7 +9,7 @@ import ClockIcon from 'src/components/Icon/Clock'
 import LowPriorityIcon from 'src/components/Icon/LowPriorityIcon'
 import MediumPriorityIcon from 'src/components/Icon/MediumPriorityIcon'
 import { User } from 'src/components/User/types'
-import { TASK_STATUS } from 'src/services/task-management/task-management.service'
+import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
 import selectUser from 'src/state/recoil/user/selector'
 
 import { TaskPriority } from './kanban-task-card-root'

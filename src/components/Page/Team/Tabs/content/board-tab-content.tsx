@@ -1,18 +1,18 @@
-import { Box, HStack, MenuItemOption, Stack, Text } from '@chakra-ui/react'
+import { Box, HStack, Stack, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { SelectMenu } from 'src/components/Base'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
-import { useTeamKRData } from 'src/components/KeyResult/hooks/use-get-team-key-result'
 import BoardWrapper from 'src/components/TaskManagement/Board/wrapper'
 import { TaskInsertDrawer } from 'src/components/TaskManagement/InsertDrawer/wrapper'
 import { TaskDrawer } from 'src/components/TaskManagement/TaskDrawer'
 import { Team } from 'src/components/Team/types'
 import { teamAtomFamily } from 'src/state/recoil/team'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
+
+import { BoardFilters } from '../BoardFilters'
 
 import messages from './messages'
 
@@ -21,40 +21,40 @@ interface BoardTabContentProperties {
 }
 
 const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
-  const router = useRouter()
-
   const setSelectedTeamId = useSetRecoilState(selectedTeamIdHighlight)
+  const defaultCycle = {
+    year: new Date().getFullYear().toString(),
+    quarter: Math.ceil((new Date().getMonth() + 1) / 3).toString(),
+  }
 
   const team = useRecoilValue(teamAtomFamily(teamId))
   const [searchTaskInput, setSearchTaskInput] = useState<string>()
-  const { data: KeyResultData, isFetching: krFetching } = useTeamKRData(teamId, '0')
+  const [resetFilters, setResetFilters] = useState<boolean>(false)
 
   const intl = useIntl()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (
+      router.query.key_result_id__id ||
+      router.query.cy ||
+      router.query.cy !== `${defaultCycle.year}+${defaultCycle.quarter}` ||
+      router.query.show_done
+    ) {
+      setResetFilters(true)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query])
 
   useEffect(() => {
     setSelectedTeamId(teamId)
   }, [setSelectedTeamId, teamId])
 
-  const handleQuery = (key: string) => (newValue: string | string[]) => {
-    if (newValue !== 'none') {
-      router.query[key] = newValue
-      router.push(router)
-      return true
-    }
-
-    router.query[key] = undefined
+  const onResetFilters = () => {
+    router.query.key_result_id__id = undefined
+    router.query.show_done = undefined
+    router.query.cy = `${defaultCycle.year}+${defaultCycle.quarter}`
     router.push(router)
-    return true
-  }
-
-  const krSelected = (): string | undefined => {
-    const key = router.query.kr ? router.query.kr : undefined
-    if (key) {
-      const selectedKr = KeyResultData?.find((kr) => kr.id === key)
-      return selectedKr ? selectedKr.title : undefined
-    }
-
-    return key
   }
 
   return (
@@ -64,25 +64,18 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
           {intl.formatMessage(messages.boardTabHeaderTitle, { team: team?.name })}
         </Text>
         <HStack alignItems="center">
-          <SelectMenu
-            closeOnSelect
-            valueLabel={krSelected()}
-            width={320}
-            borderWidth={1}
-            borderColor="new-gray.400"
-            fill="new-gray.600"
-            height="32px"
-            isDisabled={krFetching}
-            placeholder="Filtrar por KR"
-            onChange={handleQuery('key_result_id__id')}
-          >
-            <MenuItemOption value="none">Selecionar</MenuItemOption>
-            {KeyResultData?.map((keyResult) => (
-              <MenuItemOption key={keyResult.id} value={keyResult.id}>
-                {keyResult.title}
-              </MenuItemOption>
-            ))}
-          </SelectMenu>
+          {resetFilters && (
+            <Text
+              color="brand.500"
+              fontSize="14px"
+              fontWeight="500"
+              margin="0 10px"
+              onClick={() => onResetFilters()}
+            >
+              Limpar filtros
+            </Text>
+          )}
+          <BoardFilters teamId={teamId} />
           <Box maxW={320} minW={320} w="100%">
             <SearchBar
               placeholder={intl.formatMessage(messages.searchTaskInput)}

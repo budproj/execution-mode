@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 
 import KeyResultSectionTimelineLine from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Updates/line'
 import { KeyResultPatchInterface } from 'src/components/KeyResult/types'
-import { TaskHistory } from 'src/services/new-task-management/@types/task-history.type'
+import { TaskHistory } from 'src/services/task-management/@types/task-history.type'
 
 interface TaskUpdateComponentProperties {
   readonly taskUpdate: TaskHistory

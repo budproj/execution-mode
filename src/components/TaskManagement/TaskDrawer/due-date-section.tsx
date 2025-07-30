@@ -5,11 +5,11 @@ import React, { useState } from 'react'
 
 import CheckIcon from 'src/components/Icon/Check'
 import TimesIcon from 'src/components/Icon/Times'
-import { Task } from 'src/services/task-management/task-management.service'
+import { Task } from 'src/services/task-management/@types/task.type'
 
 interface TaskTitleSectionProperties {
   task: Task
-  updateTask: (_id: Task['_id'], updatedTask: Partial<Task>) => void
+  updateTask: (id: Task['id'], updatedTask: Partial<Task>) => void
 }
 
 const StyledDateInput = styled(Input)`
@@ -41,7 +41,7 @@ export const DueDateSection = ({ task, updateTask }: TaskTitleSectionProperties)
       return
     }
 
-    updateTask(task._id, { _id: task._id, dueDate: new Date(value) })
+    updateTask(task.id, { id: task.id, dueDate: new Date(value) })
     setValue(format(new Date(value), 'dd/MM/yyyy'))
     setEditMode(false)
   }

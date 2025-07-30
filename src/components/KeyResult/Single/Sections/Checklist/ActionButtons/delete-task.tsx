@@ -2,7 +2,7 @@ import React, { Ref } from 'react'
 import { useIntl } from 'react-intl'
 
 import { DeleteButton } from 'src/components/Base/Button/delete-button'
-import { useDeleteTaskByKr } from 'src/components/TaskManagement/hooks/use-delete-tasks'
+import { useDeleteTaskByKr } from 'src/components/KeyResult/hooks/use-delete-tasks'
 
 import messages from './messages'
 

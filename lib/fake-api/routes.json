@@ -1,3 +1,0 @@
-{
-  "/board/:teamId": "/board?teamsIds[0]=:teamId&_embed=tasks"
-}
