@@ -36,7 +36,12 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
 
   return (
     <Stack spacing={0}>
-      <Stack direction="row" alignItems="flex-start" position="relative">
+      <Stack
+        direction="row"
+        alignItems="flex-start"
+        position="relative"
+        justifyContent="space-between"
+      >
         <IntlLink
           href={
             keyResult?.teamId && keyResultID
@@ -63,7 +68,7 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
             </svg>
           </span>
         </IntlLink>
-        <Skeleton isLoaded={!isLoading} w="100%" display="flex">
+        <Skeleton isLoaded={!isLoading} display="flex">
           <OptionBarWrapper
             keyResultID={keyResultID}
             progress={progress}
