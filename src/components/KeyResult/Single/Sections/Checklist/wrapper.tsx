@@ -58,7 +58,6 @@ export const KeyResultChecklistWrapper = ({
   const intl = useIntl()
 
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
-  const hasData = Boolean(keyResult?.teamId)
 
   const toggleChecklistCollapse = () => {
     setIsChecklistOpen((previous) => !previous)
