@@ -1,6 +1,6 @@
 import { ParsedUrlQuery } from 'querystring'
 
-import { Collapse, Stack } from '@chakra-ui/react'
+import { Collapse, Stack, Skeleton } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
@@ -109,7 +109,7 @@ export const KeyResultChecklistWrapper = ({
     setHiddingModal(false)
   }
 
-  return isLoading || hasData ? (
+  return (
     <Stack spacing={0}>
       <Stack direction="row" alignItems="flex-start" position="relative">
         <IntlLink
@@ -138,13 +138,17 @@ export const KeyResultChecklistWrapper = ({
             </svg>
           </span>
         </IntlLink>
-        <OptionBarWrapper
-          keyResultID={keyResultID}
-          progress={progress}
-          canCreate={canCreate}
-          onCreate={handleChecklistCreation}
-        />
-        {hasItems && <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />}
+        <Skeleton isLoaded={isLoading}>
+          <OptionBarWrapper
+            keyResultID={keyResultID}
+            progress={progress}
+            canCreate={canCreate}
+            onCreate={handleChecklistCreation}
+          />
+          {hasItems && (
+            <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />
+          )}
+        </Skeleton>
       </Stack>
       {isSuccess ? (
         <Collapse in={isChecklistOpen}>
@@ -158,6 +162,5 @@ export const KeyResultChecklistWrapper = ({
         </Collapse>
       ) : undefined}
     </Stack>
-  ) : // eslint-disable-next-line unicorn/no-null
-  null
+  )
 }

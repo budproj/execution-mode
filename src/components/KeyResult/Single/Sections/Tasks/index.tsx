@@ -1,4 +1,4 @@
-import { Collapse, Stack } from '@chakra-ui/react'
+import { Collapse, Stack, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -34,7 +34,7 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
     keyResultID,
   })
 
-  return !isLoading && keyResult ? (
+  return (
     <Stack spacing={0}>
       <Stack direction="row" alignItems="flex-start" position="relative">
         <IntlLink
@@ -63,15 +63,17 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
             </svg>
           </span>
         </IntlLink>
-        <OptionBarWrapper
-          keyResultID={keyResultID}
-          progress={progress}
-          canCreate={tasks.length === 0}
-          onCreate={handleChecklistCreation}
-        />
-        {tasks.length > 0 && (
-          <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />
-        )}
+        <Skeleton isLoaded={!isLoading} w="100%" display="flex">
+          <OptionBarWrapper
+            keyResultID={keyResultID}
+            progress={progress}
+            canCreate={tasks.length === 0}
+            onCreate={handleChecklistCreation}
+          />
+          {tasks.length > 0 && (
+            <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />
+          )}
+        </Skeleton>
       </Stack>
       {isSuccess ? (
         <Collapse in={isChecklistOpen}>
@@ -85,6 +87,5 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
         </Collapse>
       ) : undefined}
     </Stack>
-  ) : // eslint-disable-next-line unicorn/no-null
-  null
+  )
 }
