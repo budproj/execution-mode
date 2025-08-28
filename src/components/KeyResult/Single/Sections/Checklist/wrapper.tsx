@@ -97,8 +97,6 @@ export const KeyResultChecklistWrapper = ({
     })
   }, [isFetching, tasks, tasks.length])
 
-  
-
   const handleClose = () => {
     resetOpenDrawer()
     resetTimeline()

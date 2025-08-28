@@ -1,5 +1,5 @@
 import { Collapse, Stack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { IntlLink } from 'src/components/Base'
@@ -33,10 +33,6 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
   } = useLogic({
     keyResultID,
   })
-
-  useEffect(() => {
-    console.log('abroba', progress)
-  }, [progress])
 
   return !isLoading && keyResult ? (
     <Stack spacing={0}>
@@ -89,5 +85,6 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
         </Collapse>
       ) : undefined}
     </Stack>
-  ) : undefined
+  ) : // eslint-disable-next-line unicorn/no-null
+  null
 }

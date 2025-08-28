@@ -26,7 +26,6 @@ import { KeyResultTasks } from '../../Sections/Tasks'
 import { SCROLLBAR_ID } from './constants'
 import messages from './messages'
 
-
 export interface KeyResultDrawerBodyProperties {
   readonly keyResultID: KeyResult['id']
   readonly isLoading?: boolean
