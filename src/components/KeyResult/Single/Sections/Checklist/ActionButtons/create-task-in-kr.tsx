@@ -56,7 +56,6 @@ export const CreateTaskButton = ({
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
 
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
-  const hasData = Boolean(keyResult?.teamId)
 
   const handleNewCheckMark = async (title: NewTask['title']) => {
     if (isSubmitting) return
@@ -115,7 +114,7 @@ export const CreateTaskButton = ({
           />
         </StyledEditableWrapper>
       )}
-      {(teamId ?? hasData) && (
+      {(teamId ?? keyResult) && (
         <Button
           ref={createButtonReference}
           variant="text"

@@ -55,7 +55,7 @@ export const KeyResultChecklist = ({
         </StyledStack>
       )}
 
-      {canCreate && teamId && (
+      {canCreate && (
         <CreateTaskButton
           mt={5}
           keyResultID={keyResultID}

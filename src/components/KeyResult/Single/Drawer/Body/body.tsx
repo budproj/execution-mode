@@ -19,9 +19,9 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
 
-import { KeyResultChecklistWrapper } from '../../Sections/Checklist/wrapper'
 import { KeyResultHistory } from '../../Sections/KeyResultHistory'
 import { KeyResultProgress } from '../../Sections/Progress/wrapper'
+import { KeyResultTasks } from '../../Sections/Tasks'
 
 import { SCROLLBAR_ID } from './constants'
 import messages from './messages'
@@ -120,7 +120,7 @@ const KeyResultDrawerBody = ({
             <Divider borderColor="gray.100" />
           </>
         )}
-        <KeyResultChecklistWrapper keyResultID={keyResultID} isLoading={isLoading} />
+        <KeyResultTasks keyResultID={keyResultID} isLoading={isLoading} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionOwner keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
