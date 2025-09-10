@@ -45,7 +45,7 @@ export const ObjectiveAccordionMenu = ({
   const canCreateKeyResult = policyHolder?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
   // Const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
-  const canDeleteObjective = userAuthzRole?.name !== AuthzUserRoles.teamMember
+  const canDeleteObjective = userAuthzRole?.name !== AuthzUserRoles.teamMember || isPersonalOkr
   const hasAnyOptions = isPersonalOkr
     ? userID === myID
     : !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
