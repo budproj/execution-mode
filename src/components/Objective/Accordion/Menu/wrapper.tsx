@@ -14,10 +14,12 @@ import { teamAtomFamily } from '../../../../state/recoil/team'
 import { GraphQLEffect } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
+import { useTeamByCompany } from './hooks/get-team-by-company'
 import messages from './messages'
-import { CreateKeyResultOption } from './option-create-key-result'
-import { DeleteObjectiveOption } from './option-delete-objective'
-import { UpdateObjectiveOption } from './option-update-objective'
+import { CreateKeyResultOption } from './options/option-create-key-result'
+import { DeleteObjectiveOption } from './options/option-delete-objective'
+import { MoveObjectiveTeamOption } from './options/option-move-objective-team'
+import { UpdateObjectiveOption } from './options/option-update-objective'
 
 interface ObjectiveAccordionMenuProperties {
   teamID?: Team['id']
@@ -46,9 +48,15 @@ export const ObjectiveAccordionMenu = ({
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
   // Const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
   const canDeleteObjective = userAuthzRole?.name !== AuthzUserRoles.teamMember || isPersonalOkr
+  const isOwner = userID === myID && objective?.owner?.id === userID
+  const hasManagementRole = userAuthzRole?.name !== AuthzUserRoles.teamMember || isOwner
   const hasAnyOptions = isPersonalOkr
     ? userID === myID
     : !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
+
+  const teamId = teamID ?? objective?.teamId ?? team?.id
+
+  const { data: teamList } = useTeamByCompany(teamId)
 
   return (
     <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>
@@ -79,6 +87,9 @@ export const ObjectiveAccordionMenu = ({
           {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
           {canDeleteObjective && (
             <DeleteObjectiveOption objectiveID={objectiveID} userID={userID} teamID={teamID} />
+          )}
+          {canUpdateObjective && hasManagementRole && !isPersonalOkr && teamList && objectiveID && (
+            <MoveObjectiveTeamOption objectiveId={objectiveID} value={teamId} data={teamList} />
           )}
         </MenuList>
       </Menu>

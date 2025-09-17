@@ -10,13 +10,12 @@ import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 
-import { teamActiveObjectives } from '../../../../state/recoil/team/active-objectives'
-import { DeleteResult } from '../../../types'
-import { Objective } from '../../types'
-import { stopAccordionOpen } from '../handlers'
-
-import messages from './messages'
-import queries from './queries.gql'
+import { teamActiveObjectives } from '../../../../../state/recoil/team/active-objectives'
+import { DeleteResult } from '../../../../types'
+import { Objective } from '../../../types'
+import { stopAccordionOpen } from '../../handlers'
+import messages from '../messages'
+import queries from '../queries.gql'
 
 interface DeleteObjectiveOptionProperties {
   objectiveID?: Objective['id']

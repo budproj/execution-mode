@@ -1499,6 +1499,10 @@
     "defaultMessage": "Fim",
     "description": "This message is displayed as the column header for the cycle table in the date end column"
   },
+  "Lv7vk/": {
+    "defaultMessage": "Pesquise ou selecione na lista o time que deseja vincular esse OKR",
+    "description": "This message appears on the header in update modal."
+  },
   "LvI+KK": {
     "defaultMessage": "Idioma",
     "description": "This message is the label of our locale switcher in the settings page"
@@ -1842,6 +1846,10 @@
   "R8hOYh": {
     "defaultMessage": "Este time não possui OKRs",
     "description": "This message is displayed as the empty state message inside the team page"
+  },
+  "RG75lg": {
+    "defaultMessage": "Mover este KR para outro Time",
+    "description": "This is the fourth option that appears when you open the menu of a given objective inside the accordion button"
   },
   "RN1J2p": {
     "defaultMessage": "Essa semana",

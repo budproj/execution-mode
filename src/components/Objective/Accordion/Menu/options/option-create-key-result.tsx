@@ -3,11 +3,10 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { keyResultInsertDrawerObjectiveID } from '../../../../state/recoil/key-result/drawers/insert/objective-id'
-import { Objective } from '../../types'
-import { stopAccordionOpen } from '../handlers'
-
-import messages from './messages'
+import { keyResultInsertDrawerObjectiveID } from '../../../../../state/recoil/key-result/drawers/insert/objective-id'
+import { Objective } from '../../../types'
+import { stopAccordionOpen } from '../../handlers'
+import messages from '../messages'
 
 interface CreateKeyResultOptionProperties {
   objectiveID?: Objective['id']
