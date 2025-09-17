@@ -13,3 +13,8 @@ export type Cycle = {
   parent_id: string
   active: boolean
 }
+
+export interface CycleFilter {
+  year: string
+  quarter: string
+}

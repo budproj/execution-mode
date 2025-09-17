@@ -5,8 +5,8 @@ import { KeyResult, KeyResultWithTasks } from './@types'
 export class KeyResultService {
   constructor(private readonly client: AxiosInstance) {}
 
-  async getKeyResultTeam(teamId: string, objectiveId: string) {
-    const { data } = await this.client.get<KeyResult[]>(`kr/${teamId}/${objectiveId}/`)
+  async getKeyResultTeam(teamId: string) {
+    const { data } = await this.client.get<KeyResult[]>(`api/okr/key_result/${teamId}`)
     return data
   }
 

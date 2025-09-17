@@ -6,9 +6,9 @@ import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
+import { useAddTask } from 'src/components/KeyResult/hooks/use-add-task-new'
 import { NewTask } from 'src/components/Task/types'
-import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
-import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import meAtom from 'src/state/recoil/user/me'
 

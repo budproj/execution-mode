@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import React, { useRef } from 'react'
 
 import { TaskSummary } from 'src/services/key-result/@types'
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { Task } from 'src/services/task-management/@types/task.type'
 
 import { CreateTaskButton } from './ActionButtons/create-task-in-kr'
 import { InlineTaskList } from './inline-tasklist'

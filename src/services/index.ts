@@ -10,8 +10,6 @@ import { getKeyResultInstance } from './key-result/key-result-instance'
 import { KeyResultService } from './key-result/key-result.service'
 import { getLLMInstance } from './llm'
 import { LlmService } from './llm/llm.service'
-import { getNewTaskManagementInstance } from './new-task-management'
-import { NewTaskManagementService } from './new-task-management/new-task-management.service'
 import { getObjectiveInstance } from './objective'
 import { ObjectiveService } from './objective/objective.service'
 import { getRoutinesInstance } from './routines'
@@ -26,7 +24,6 @@ export interface Services {
   comments: AxiosInstance
   llm: LlmService
   taskManagement: TaskManagementService
-  newTaskManagement: NewTaskManagementService
   keyResult: KeyResultService
   cycle: CycleService
   team: TeamService
@@ -52,9 +49,6 @@ export const getServices = async (
     llm: new LlmService(configureInstance(getLLMInstance(config), authToken)),
     taskManagement: new TaskManagementService(
       configureInstance(getTaskManagementInstance(config), authToken),
-    ),
-    newTaskManagement: new NewTaskManagementService(
-      configureInstance(getNewTaskManagementInstance(config), authToken),
     ),
     keyResult: new KeyResultService(configureInstance(getKeyResultInstance(config), authToken)),
     cycle: new CycleService(configureInstance(getCycleInstance(config), authToken)),

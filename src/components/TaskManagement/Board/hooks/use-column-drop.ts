@@ -1,7 +1,7 @@
 import { useDrop } from 'react-dnd'
 
-import { TASK_STATUS as ColumnType } from 'src/services/new-task-management/@types/task-status.enum'
-import { Task as TaskModel } from 'src/services/new-task-management/@types/task.type'
+import { TASK_STATUS as ColumnType } from 'src/services/task-management/@types/task-status.enum'
+import { Task as TaskModel } from 'src/services/task-management/@types/task.type'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 

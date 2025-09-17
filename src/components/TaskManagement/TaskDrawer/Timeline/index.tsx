@@ -4,12 +4,12 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultSectionAddCommentInput from 'src/components/KeyResult/Single/Sections/AddComment/input'
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { Task } from 'src/services/task-management/@types/task.type'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
-import { useAddTaskComment } from '../../hooks/new-task/use-add-task-comments'
-import { useGetTaskComments } from '../../hooks/new-task/use-get-task-comments'
+import { useAddTaskComment } from '../../hooks/use-add-task-comments'
+import { useGetTaskComments } from '../../hooks/use-get-task-comments'
 
 import { TimelineWrapper } from './timeline-wrapper'
 
