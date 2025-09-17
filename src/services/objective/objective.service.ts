@@ -7,7 +7,7 @@ export class ObjectiveService {
 
   async patch(objective_id: string, data: Partial<Objective>) {
     const { data: response } = await this.client.patch<Objective>(
-      `api/okr/objective/${objective_id}`,
+      `api/objective/${objective_id}`,
       data,
     )
     return response

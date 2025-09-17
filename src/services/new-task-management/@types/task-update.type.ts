@@ -1,5 +1,5 @@
 import { User } from 'src/components/User/types'
-import { KeyResult } from 'src/services/okr/key-result/@types'
+import { KeyResult } from 'src/services/key-result/@types'
 
 import { TASK_STATUS } from './task-status.enum'
 

@@ -1,6 +1,5 @@
 import { Heading, MenuItemOption } from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
 
 import { SelectMenu } from 'src/components/Base'
 
@@ -11,8 +10,6 @@ interface DataSelectMenuProperties {
 }
 
 export const DataSelectMenu = ({ value, options, onChange }: DataSelectMenuProperties) => {
-  const intl = useIntl()
-
   const currentOption = options.get(value)
   const handleChange = (newFormat: string | string[]) => {
     if (Array.isArray(newFormat)) throw new Error('Cannot parse string array')

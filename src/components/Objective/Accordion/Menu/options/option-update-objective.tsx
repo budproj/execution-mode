@@ -6,7 +6,6 @@ import { useSetRecoilState } from 'recoil'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 
 import { stopAccordionOpen } from '../../handlers'
-
 import messages from '../messages'
 
 interface UpdateObjectiveOptionProperties {
