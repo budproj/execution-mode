@@ -6,13 +6,15 @@ type ObjectiveAccordionMenuMessage =
   | 'secondMenuOption'
   | 'thirdMenuOption'
   | 'fourthMenuOption'
+  | 'fifthMenuOption'
   | 'deleteDialogKeyword'
   | 'deleteObjectiveFirstStageTitle'
   | 'deleteObjectiveFirstStageDescription'
   | 'deleteDialogConfirmationLabel'
   | 'deleteObjectiveSuccessToastMessage'
   | 'deleteObjectiveErrorToastMessage'
-  | 'updateObjectiveSucessToastMessage'
+  | 'updateObjectiveSucessToastTeamMessage'
+  | 'updateObjectiveSucessToastCycleMessage'
   | 'updateObjectiveErrorToastMessage'
 
 export default defineMessages<ObjectiveAccordionMenuMessage>({
@@ -45,8 +47,15 @@ export default defineMessages<ObjectiveAccordionMenuMessage>({
   },
 
   fourthMenuOption: {
-    defaultMessage: 'Mover este KR para outro Time',
-    id: 'RG75lg',
+    defaultMessage: 'Mover este OKR para outro Time',
+    id: 'vnjJt9',
+    description:
+      'This is the fourth option that appears when you open the menu of a given objective inside the accordion button',
+  },
+
+  fifthMenuOption: {
+    defaultMessage: 'Mover este OKR para outro Ciclo',
+    id: 'KlhDYs',
     description:
       'This is the fourth option that appears when you open the menu of a given objective inside the accordion button',
   },
@@ -89,9 +98,15 @@ export default defineMessages<ObjectiveAccordionMenuMessage>({
       'This message appears when the user tries to remove a given objective, but receives an error',
   },
 
-  updateObjectiveSucessToastMessage: {
+  updateObjectiveSucessToastTeamMessage: {
     defaultMessage: 'O objetivo foi movido de time com sucesso.',
     id: 'ws7tAT',
+    description: 'This message appears on a successful toast when update objective team.',
+  },
+
+  updateObjectiveSucessToastCycleMessage: {
+    defaultMessage: 'O objetivo foi movido de ciclo com sucesso.',
+    id: 'DIQdct',
     description: 'This message appears on a successful toast when update objective team.',
   },
 

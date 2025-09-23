@@ -4,28 +4,28 @@ import { useIntl } from 'react-intl'
 
 import { UpdateModal } from 'src/components/KeyResult/UpdateModal'
 import { Objective } from 'src/components/Objective/types'
-import { Team } from 'src/services/team/@types'
+import { Cycle } from 'src/services/cycle/@types'
 
 import { useUpdateObjective } from '../hooks/get-update-objective'
 import messages from '../messages'
 
-interface MoveObjectiveTeamOptionProperties {
+interface UpdateObjectiveCycleOptionProperties {
   objectiveId: Objective['id']
   value?: string
-  data: Team[]
+  data?: Cycle[]
 }
 
-const transformTeamToMap = (team: Team[]) => {
-  const objectEntries = Object.values(team)
+const transformCycleToMap = (cycle: Cycle[]) => {
+  const objectEntries = Object.values(cycle)
 
-  return new Map(objectEntries.map((object) => [object.id, object.name]))
+  return new Map(objectEntries.map((object) => [object.id, object.period]))
 }
 
-export const MoveObjectiveTeamOption = ({
+export const UpdateObjectiveCycleOption = ({
   objectiveId,
   value,
   data,
-}: MoveObjectiveTeamOptionProperties) => {
+}: UpdateObjectiveCycleOptionProperties) => {
   const intl = useIntl()
   const toast = useToast()
 
@@ -42,16 +42,16 @@ export const MoveObjectiveTeamOption = ({
     event.stopPropagation()
   }
 
-  const handleSelect = async (teamId: string) => {
+  const handleSelect = async (cycleId: string) => {
     const objective = await updateObjective({
       objectiveId,
-      data: { teamId },
+      data: { cycleId },
     })
 
     if (objective) {
       toast({
         status: 'success',
-        title: intl.formatMessage(messages.updateObjectiveSucessToastMessage),
+        title: intl.formatMessage(messages.updateObjectiveSucessToastCycleMessage),
       })
     } else {
       toast({
@@ -63,12 +63,12 @@ export const MoveObjectiveTeamOption = ({
 
   return (
     <>
-      <MenuItem onClick={handleClick}>{intl.formatMessage(messages.fourthMenuOption)}</MenuItem>
-      {value && (
+      <MenuItem onClick={handleClick}>{intl.formatMessage(messages.fifthMenuOption)}</MenuItem>
+      {value && data && (
         <UpdateModal
           value={value}
-          data={transformTeamToMap(data)}
-          updateType="Time"
+          data={transformCycleToMap(data)}
+          updateType="Ciclo"
           isOpen={isDialogOpen}
           onClose={handleClose}
           onSubmit={handleSelect}

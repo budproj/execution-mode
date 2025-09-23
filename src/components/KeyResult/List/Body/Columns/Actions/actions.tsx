@@ -16,7 +16,10 @@ import { GraphQLEffect } from '../../../../../types'
 import { CopyAction } from './copy-action'
 import { DeleteAction } from './delete-action'
 import EditAction from './edit-action'
+import { useGetKeyResult } from './hooks/get-key-result'
+import { useListObjectives } from './hooks/get-list-team-objectives'
 import messages from './messages'
+import { UpdateKeyResultObjectiveOption } from './update-key-result-objective'
 
 export interface KeyResultListBodyColumnActionsProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -43,6 +46,9 @@ const KeyResultListBodyColumnActions = ({
     ? keyResult?.owner?.id === myID
     : keyResult?.policy?.update === GraphQLEffect.ALLOW
 
+  const { data: objectives } = useListObjectives(isPersonalKr, myID, keyResult?.teamId)
+  const { data: apiKeyResult } = useGetKeyResult(id)
+
   return (
     <KeyResultListBodyColumnBase preventLineClick>
       <Menu placement="bottom-end" variant="action-list">
@@ -64,6 +70,13 @@ const KeyResultListBodyColumnActions = ({
           {keyResult?.title && <CopyAction keyResultTitle={keyResult.title} />}
           {canEdit && <EditAction id={id} />}
           {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
+          {canEdit && id && apiKeyResult?.objectiveId && (
+            <UpdateKeyResultObjectiveOption
+              keyResultId={id}
+              value={apiKeyResult?.objectiveId}
+              data={objectives}
+            />
+          )}
         </MenuList>
       </Menu>
     </KeyResultListBodyColumnBase>

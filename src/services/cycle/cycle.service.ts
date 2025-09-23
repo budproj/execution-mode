@@ -6,12 +6,12 @@ export class CycleService {
   constructor(private readonly client: AxiosInstance) {}
 
   async getTeamCyclesDate(teamId: string) {
-    const { data } = await this.client.get<CycleFilter[]>(`api/okr/cycle/date/${teamId}`)
+    const { data } = await this.client.get<CycleFilter[]>(`api/cycle/date/${teamId}`)
     return data
   }
 
   async getTeamCycle(teamId: string) {
-    const { data } = await this.client.get<Cycle[]>(`api/okr/cycle/${teamId}`)
+    const { data } = await this.client.get<Cycle[]>(`api/cycle/team/${teamId}`)
     return data
   }
 }

@@ -3639,6 +3639,10 @@
     "defaultMessage": "Buscar membros",
     "description": "This message is used in the search input while searching for users"
   },
+  "ws7tAT": {
+    "defaultMessage": "O objetivo foi movido de time com sucesso.",
+    "description": "This message appears on a successful toast when update objective team."
+  },
   "wsXNFt": {
     "defaultMessage": "Responder",
     "description": "This message appears as a label on the button used to reply to a comment."
@@ -3686,6 +3690,10 @@
   "xPoUwI": {
     "defaultMessage": "Um desenho de uma engrenagem para o botão de edição de time",
     "description": "The gear icon description"
+  },
+  "xSSnsF": {
+    "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde.",
+    "description": "This message appears on a error toast when update objective team."
   },
   "xVR0F1": {
     "defaultMessage": "Apelido",

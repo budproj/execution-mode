@@ -1,12 +1,18 @@
 import { defineMessages } from 'react-intl'
 
-type UpdateModalMessages = 'modalBody' | 'confirmModalButton' | 'closeModalButton'
+type UpdateModalMessages = 'modalBody' | 'confirmModalButton' | 'closeModalButton' | 'modalTitle'
 
 export default defineMessages<UpdateModalMessages>({
   modalBody: {
-    defaultMessage: 'Pesquise ou selecione na lista o time que deseja vincular esse OKR',
-    id: 'Lv7vk/',
-    description: 'This message appears on the header in update modal.',
+    defaultMessage: 'Pesquise ou selecione na lista o {option} que deseja vincular esse OKR',
+    id: 'AjIgUB',
+    description: 'This message appears on update modal body.',
+  },
+
+  modalTitle: {
+    defaultMessage: 'Alterar o {type} deste OKR',
+    id: 'urN1WV',
+    description: 'This message appears on update modal title.',
   },
 
   confirmModalButton: {

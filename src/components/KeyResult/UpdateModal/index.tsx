@@ -52,7 +52,7 @@ export const UpdateModal = ({
             <Heading display="flex" flexDir="column" justifyContent="center" alignItems="center">
               <ThreeUsersIcon desc="sda" fill="brand.500" fontSize={60} mt={4} />
               <Text mt={7} color="gray.500" fontWeight={500} as="h3" fontSize={24}>
-                Alterar o {updateType} deste OKR
+                {intl.formatMessage(messages.modalTitle, { type: updateType })}
               </Text>
               <Text
                 mt={5}
@@ -62,7 +62,7 @@ export const UpdateModal = ({
                 fontSize={16}
                 maxW={340}
               >
-                {intl.formatMessage(messages.modalBody)}
+                {intl.formatMessage(messages.modalBody, { option: updateType })}
               </Text>
             </Heading>
 

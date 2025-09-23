@@ -5,8 +5,16 @@ import { KeyResult, KeyResultWithTasks } from './@types'
 export class KeyResultService {
   constructor(private readonly client: AxiosInstance) {}
 
+  async patch(keyResultId: string, data: Partial<KeyResult>) {
+    const { data: response } = await this.client.patch<KeyResult>(
+      `api/key-result/${keyResultId}`,
+      data,
+    )
+    return response
+  }
+
   async getKeyResultTeam(teamId: string) {
-    const { data } = await this.client.get<KeyResult[]>(`api/okr/key_result/${teamId}`)
+    const { data } = await this.client.get<KeyResult[]>(`api/key-result/team/${teamId}`)
     return data
   }
 
@@ -21,7 +29,7 @@ export class KeyResultService {
   }
 
   async getKeyResultById(keyResultId: string) {
-    const { data } = await this.client.get<KeyResult>(`kr/${keyResultId}/`)
+    const { data } = await this.client.get<KeyResult>(`api/key-result/${keyResultId}`)
     return data
   }
 }

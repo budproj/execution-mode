@@ -14,12 +14,14 @@ import { teamAtomFamily } from '../../../../state/recoil/team'
 import { GraphQLEffect } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
-import { useTeamByCompany } from './hooks/get-team-by-company'
+import { useCycleByCompany } from './hooks/get-company-cycles-by-team'
+import { useTeamByCompany } from './hooks/get-company-teams-by-team'
 import messages from './messages'
 import { CreateKeyResultOption } from './options/option-create-key-result'
 import { DeleteObjectiveOption } from './options/option-delete-objective'
-import { MoveObjectiveTeamOption } from './options/option-move-objective-team'
 import { UpdateObjectiveOption } from './options/option-update-objective'
+import { UpdateObjectiveCycleOption } from './options/option-update-objective-cycle'
+import { UpdateObjectiveTeamOption } from './options/option-update-objective-team'
 
 interface ObjectiveAccordionMenuProperties {
   teamID?: Team['id']
@@ -57,6 +59,7 @@ export const ObjectiveAccordionMenu = ({
   const teamId = teamID ?? objective?.teamId ?? team?.id
 
   const { data: teamList } = useTeamByCompany(teamId)
+  const { data: cycleList } = useCycleByCompany(teamId)
 
   return (
     <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>
@@ -88,8 +91,15 @@ export const ObjectiveAccordionMenu = ({
           {canDeleteObjective && (
             <DeleteObjectiveOption objectiveID={objectiveID} userID={userID} teamID={teamID} />
           )}
-          {canUpdateObjective && hasManagementRole && !isPersonalOkr && teamList && objectiveID && (
-            <MoveObjectiveTeamOption objectiveId={objectiveID} value={teamId} data={teamList} />
+          {canUpdateObjective && hasManagementRole && !isPersonalOkr && objectiveID && (
+            <>
+              <UpdateObjectiveTeamOption objectiveId={objectiveID} value={teamId} data={teamList} />
+              <UpdateObjectiveCycleOption
+                objectiveId={objectiveID}
+                value={objective.cycle?.id}
+                data={cycleList}
+              />
+            </>
           )}
         </MenuList>
       </Menu>
