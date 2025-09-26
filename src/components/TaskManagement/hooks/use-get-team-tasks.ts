@@ -10,7 +10,7 @@ export function useTeamTasksData(parameters: ParsedUrlQuery) {
 
   const parameters_ = {
     ...parameters,
-    deleted_at__isnull: 'True',
+    deleted_at: 'True',
   }
   const query = useQuery({
     queryKey: [`taskManager:getAllTasks`, parameters],
@@ -19,6 +19,7 @@ export function useTeamTasksData(parameters: ParsedUrlQuery) {
       const data = await taskManagement.getAllTasks(parameters_)
       return data
     },
+    enabled: Boolean(parameters.team_id ?? parameters.key_result_id),
   })
 
   return query

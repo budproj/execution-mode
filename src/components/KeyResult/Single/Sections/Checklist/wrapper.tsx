@@ -68,7 +68,7 @@ export const KeyResultChecklistWrapper = ({
     isFetching,
     isSuccess,
     refetch,
-  } = useTeamTasksData({ key_result_id__id: keyResultID } as ParsedUrlQuery)
+  } = useTeamTasksData({ key_result_id: keyResultID } as ParsedUrlQuery)
 
   const handleChecklistCreation = () => {
     refetch()
@@ -114,7 +114,7 @@ export const KeyResultChecklistWrapper = ({
         <IntlLink
           href={
             keyResult?.teamId && keyResultID
-              ? `/explore/${keyResult?.teamId}?activeTab=tasks&key_result_id__id=${keyResultID}`
+              ? `/explore/${keyResult?.teamId}?activeTab=tasks&key_result_id=${keyResultID}`
               : '#'
           }
           onClick={handleClose}

@@ -2,7 +2,7 @@ import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { Except } from 'src/helpers/except'
 import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
 
-enum KeyResultFormat {
+export enum KeyResultFormat {
   NUMBER = 'NUMBER',
   PERCENTAGE = 'PERCENTAGE',
   COIN_BRL = 'COIN_BRL',
@@ -11,12 +11,12 @@ enum KeyResultFormat {
   COIN_GBP = 'COIN_GBP',
 }
 
-enum KeyResultType {
+export enum KeyResultType {
   ASCENDING = 'ASCENDING',
   DESCENDING = 'DESCENDING',
 }
 
-enum KeyResultMode {
+export enum KeyResultMode {
   COMPLETED = 'COMPLETED',
   PUBLISHED = 'PUBLISHED',
   DRAFT = 'DRAFT',

@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios'
 
-import { Cycle, CycleFilter } from './@types'
+import { Cycle } from './@types'
 
 export class CycleService {
   constructor(private readonly client: AxiosInstance) {}
 
-  async getTeamCyclesDate(teamId: string) {
-    const { data } = await this.client.get<CycleFilter[]>(`api/cycle/date/${teamId}`)
+  async getTeamAllCycles(teamId: string) {
+    const { data } = await this.client.get<Cycle[]>(`api/cycle/team/${teamId}/all`)
     return data
   }
 

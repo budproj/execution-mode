@@ -10,7 +10,7 @@ export function useGetTeamCyclesDate(teamId: string) {
     queryKey: [`taskManager:getTeamCycles:${teamId}`],
     queryFn: async () => {
       const { cycle } = await servicesPromise
-      const data = await cycle.getTeamCyclesDate(teamId)
+      const data = await cycle.getTeamAllCycles(teamId)
       return data
     },
   })

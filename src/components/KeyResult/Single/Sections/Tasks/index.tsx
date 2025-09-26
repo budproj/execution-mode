@@ -45,7 +45,7 @@ export const KeyResultTasks = ({ keyResultID, isLoading }: KeyResultTasksPropert
         <IntlLink
           href={
             keyResult?.teamId && keyResultID
-              ? `/explore/${keyResult?.teamId}?activeTab=tasks&key_result_id__id=${keyResultID}`
+              ? `/explore/${keyResult?.teamId}?activeTab=tasks&key_result_id=${keyResultID}`
               : '#'
           }
           onClick={handleClose}

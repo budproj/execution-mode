@@ -811,6 +811,10 @@
     "defaultMessage": "comentou no seu resultado-chave:",
     "description": "This message is displayed to describe a notification that occurs when someone comments on a user`s KR."
   },
+  "AjIgUB": {
+    "defaultMessage": "Pesquise ou selecione na lista o {option} que deseja vincular esse OKR",
+    "description": "This message appears on update modal body."
+  },
   "AngG7m": {
     "defaultMessage": "{today, select, true {hoje às} false {às} other {às}}",
     "description": "The prefix of the hour description"
@@ -970,6 +974,10 @@
   "DHoDPU": {
     "defaultMessage": "Salvar",
     "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawers"
+  },
+  "DIQdct": {
+    "defaultMessage": "O objetivo foi movido de ciclo com sucesso.",
+    "description": "This message appears on a successful toast when update objective team."
   },
   "DRKiQR": {
     "defaultMessage": "Parabéns! Você completou este resultado chave.",
@@ -1431,6 +1439,10 @@
     "defaultMessage": "Apagar",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
   },
+  "KlhDYs": {
+    "defaultMessage": "Mover este OKR para outro Ciclo",
+    "description": "This is the fourth option that appears when you open the menu of a given objective inside the accordion button"
+  },
   "L/b/G/": {
     "defaultMessage": "Um desenho de uma pasta aberta sem nada dentro",
     "description": "The alternative text explaining the empty folder image"
@@ -1502,10 +1514,6 @@
   "Lt+YEZ": {
     "defaultMessage": "Fim",
     "description": "This message is displayed as the column header for the cycle table in the date end column"
-  },
-  "Lv7vk/": {
-    "defaultMessage": "Pesquise ou selecione na lista o time que deseja vincular esse OKR",
-    "description": "This message appears on the header in update modal."
   },
   "LvI+KK": {
     "defaultMessage": "Idioma",
@@ -1723,6 +1731,10 @@
     "defaultMessage": "Nome",
     "description": "The label of the first name field in the create user form"
   },
+  "PWVeP0": {
+    "defaultMessage": "Mover este Resultado-Chave para outro objetivo",
+    "description": "This message appears in the button that copies the title of the key result"
+  },
   "PYLIcI": {
     "defaultMessage": "Meta",
     "description": "This message is displayed below the goal thumb"
@@ -1850,10 +1862,6 @@
   "R8hOYh": {
     "defaultMessage": "Este time não possui OKRs",
     "description": "This message is displayed as the empty state message inside the team page"
-  },
-  "RG75lg": {
-    "defaultMessage": "Mover este KR para outro Time",
-    "description": "This is the fourth option that appears when you open the menu of a given objective inside the accordion button"
   },
   "RN1J2p": {
     "defaultMessage": "Essa semana",
@@ -2510,6 +2518,10 @@
   "cz6EUM": {
     "defaultMessage": "Foto",
     "description": "The label of the picture field in the create user form"
+  },
+  "d3sTZR": {
+    "defaultMessage": "O Resultado-Chave foi movido de objetivo com sucesso.",
+    "description": "This message appears on a successful toast when update objective team."
   },
   "d62Bt/": {
     "defaultMessage": "Ícone de um balão de fala",
@@ -3515,6 +3527,10 @@
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "urN1WV": {
+    "defaultMessage": "Alterar o {type} deste OKR",
+    "description": "This message appears on update modal title."
+  },
   "usAoP+": {
     "defaultMessage": "Trimestral",
     "description": "This option makes an cycle with quarterly cadence"
@@ -3578,6 +3594,10 @@
   "vhq3gt": {
     "defaultMessage": "Feminino",
     "description": "The user gender female option while creating a new workspace"
+  },
+  "vnjJt9": {
+    "defaultMessage": "Mover este OKR para outro Time",
+    "description": "This is the fourth option that appears when you open the menu of a given objective inside the accordion button"
   },
   "vqeE5J": {
     "defaultMessage": "Lembretes de rotina",

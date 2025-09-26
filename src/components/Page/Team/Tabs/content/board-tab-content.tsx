@@ -22,10 +22,6 @@ interface BoardTabContentProperties {
 
 const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
   const setSelectedTeamId = useSetRecoilState(selectedTeamIdHighlight)
-  const defaultCycle = {
-    year: new Date().getFullYear().toString(),
-    quarter: Math.ceil((new Date().getMonth() + 1) / 3).toString(),
-  }
 
   const team = useRecoilValue(teamAtomFamily(teamId))
   const [searchTaskInput, setSearchTaskInput] = useState<string>()
@@ -36,9 +32,9 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
 
   useEffect(() => {
     if (
-      router.query.key_result_id__id ||
+      router.query.key_result_id ||
       router.query.cy ||
-      router.query.cy !== `${defaultCycle.year}+${defaultCycle.quarter}` ||
+      router.query.cy ||
       router.query.show_done
     ) {
       setResetFilters(true)
@@ -51,9 +47,9 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
   }, [setSelectedTeamId, teamId])
 
   const onResetFilters = () => {
-    router.query.key_result_id__id = undefined
+    router.query.key_result_id = undefined
     router.query.show_done = undefined
-    router.query.cy = `${defaultCycle.year}+${defaultCycle.quarter}`
+    router.query.cy = undefined
     router.push(router)
   }
 

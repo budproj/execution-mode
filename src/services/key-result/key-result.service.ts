@@ -13,8 +13,12 @@ export class KeyResultService {
     return response
   }
 
-  async getKeyResultTeam(teamId: string) {
-    const { data } = await this.client.get<KeyResult[]>(`api/key-result/team/${teamId}`)
+  async getKeyResultTeam(teamId: string, cy: string) {
+    const { data } = await this.client.get<KeyResult[]>(`api/key-result/team/${teamId}`, {
+      params: {
+        cy,
+      },
+    })
     return data
   }
 

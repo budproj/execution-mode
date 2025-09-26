@@ -61,32 +61,30 @@ export class TaskManagementService {
       4. since/upto: since + Date define start date, upto + Date define end
     */
 
-    const { data: response } = await this.client.get<Task[]>(`task-management/task`, {
-      params: parameters,
+    const { data: response } = await this.client.get<Task[]>(`api/task-manager/task`, {
+      params: {
+        team_id: parameters.team_id,
+        deleted_at: parameters.deleted_at,
+        key_result_id: parameters.key_result_id,
+        cy: parameters.cy,
+        show_done: parameters.show_done,
+      },
     })
     return response
   }
 
-  async getTask(id: Task['id'], teamId?: string) {
-    const parameters = {
-      team_id__id: teamId,
-    }
-    const { data: response } = await this.client.get<Task>(`task-management/task/${id}`, {
-      params: parameters,
-    })
-
+  async getTask(id: Task['id']) {
+    const { data: response } = await this.client.get<Task>(`api/task-manager/task/${id}`)
     return response
   }
 
   async addTask(data: TaskInsert) {
-    const { data: response } = await this.client.post<NewTask>(`task-management/task`, data)
-
+    const { data: response } = await this.client.post<NewTask>(`api/task-manager/task`, data)
     return response
   }
 
   async removeTask(id: Task['id']) {
-    // Tasks are soft deleted
-    await this.client.delete<NewTask>(`task-management/task/${id}`)
+    await this.client.delete<NewTask>(`api/task-manager/task/${id}`)
   }
 
   async updateTask(id: Task['id'], data: Partial<TaskUpdate>) {
@@ -94,7 +92,7 @@ export class TaskManagementService {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.put<Task>(`task-management/task/${id}`, data)
+    const { data: response } = await this.client.patch<Task>(`api/task-manager/task/${id}`, data)
 
     return response
   }

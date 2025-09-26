@@ -34,7 +34,7 @@ export const useLogic = ({ keyResultID }: useLogicProperties) => {
     isFetching,
     isSuccess,
     refetch,
-  } = useTeamTasksData({ key_result_id__id: keyResultID } as ParsedUrlQuery)
+  } = useTeamTasksData({ key_result_id: keyResultID } as ParsedUrlQuery)
 
   // Refetch tasks after creation
   const handleChecklistCreation = () => {

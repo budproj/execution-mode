@@ -9,8 +9,8 @@ export type Cycle = {
   date_end: Date
   team_id: string
   period: string
-  cadence: CycleCadence
-  parent_id: string
+  cadence: string
+  parent: string
   active: boolean
 }
 

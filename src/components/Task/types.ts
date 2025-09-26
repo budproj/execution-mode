@@ -18,7 +18,7 @@ export interface Task extends GraphQLNode {
 
 export interface NewTask {
   id: string
-  key_result?: string | undefined
+  keyResult?: string | undefined
   orderindex: number
   status: TASK_STATUS
   initialDate: Date

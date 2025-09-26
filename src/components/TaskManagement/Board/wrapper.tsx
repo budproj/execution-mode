@@ -32,7 +32,7 @@ const BoardWrapper = ({ teamId, searchTaskInput, isSpinnerLoading }: BoardWrappe
   useEffect(() => {
     setParameters({
       ...router.query,
-      team_id__id: router.query.id,
+      team_id: router.query.id,
     })
   }, [router.query])
 

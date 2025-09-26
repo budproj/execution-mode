@@ -80,7 +80,7 @@ export const CreateTaskButton = ({
         supportTeam: [],
         tags: [],
         orderindex: 0,
-        key_result: keyResultID,
+        keyResult: keyResultID,
         cycle: '',
       })
     }
