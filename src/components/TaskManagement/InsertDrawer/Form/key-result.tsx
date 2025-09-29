@@ -20,7 +20,7 @@ export const KeyResultInput = ({ isLoading }: KeyResultInputProperties) => {
 
   const { values, setFieldValue } = useFormikContext<FormValues>()
   const { id: teamId } = router.query
-  const { data: KeyResultData } = useTeamKRData(teamId as string)
+  const { data: KeyResultData } = useTeamKRData(teamId as string, '')
 
   const handleChange = (newKr: string | string[]) => {
     if (Array.isArray(newKr)) throw new Error('Cannot parse string array')
