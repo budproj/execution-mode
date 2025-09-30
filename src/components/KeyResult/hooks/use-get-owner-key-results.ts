@@ -6,14 +6,14 @@ import { ServicesContext } from 'src/components/Base/ServicesProvider/services-p
 const MODULE = 'KeyResult'
 const ACTION = 'getAllOwnerKR'
 
-export function useOwnerKRData(owner: string, objectiveId: string) {
+export function useOwnerKRData(owner: string) {
   const { servicesPromise } = useContext(ServicesContext)
 
   const query = useQuery({
     queryKey: [`${MODULE}:${ACTION}:${owner}`],
     queryFn: async () => {
       const { keyResult } = await servicesPromise
-      const data = await keyResult.getKeyResultByOwner(owner, objectiveId)
+      const data = await keyResult.getKeyResultByOwner(owner)
       return data
     },
   })
