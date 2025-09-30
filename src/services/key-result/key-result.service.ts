@@ -22,13 +22,15 @@ export class KeyResultService {
     return data
   }
 
-  async getKeyResultByOwner(owner: string, objectiveId: string) {
-    const { data } = await this.client.get<KeyResult[]>(`kr/owner/${owner}/${objectiveId}/`)
+  async getKeyResultByOwner(owner: string) {
+    const { data } = await this.client.get<KeyResult[]>(`api/key-result/user/${owner}`)
     return data
   }
 
   async getKeyResultByOwnerWithTasks(owner: string) {
-    const { data } = await this.client.get<KeyResultWithTasks[]>(`kr/task/${owner}/`)
+    const { data } = await this.client.get<KeyResultWithTasks[]>(
+      `api/key-result/tasks/user/${owner}`,
+    )
     return data
   }
 
