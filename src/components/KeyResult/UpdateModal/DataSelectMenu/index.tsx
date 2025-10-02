@@ -23,7 +23,6 @@ export const DataSelectMenu = ({ value, options, onChange }: DataSelectMenuPrope
       fontSize="md"
       placeholder={currentOption ?? ''}
       value={value}
-      textOverflow="ellipsis"
       onChange={handleChange}
     >
       {[...options].map(([key, value]) => (
