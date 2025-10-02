@@ -36,6 +36,7 @@ export enum HOST {
 export enum LOCALE {
   'pt-BR' = 'pt-BR',
   'en-US' = 'en-US',
+  'es-AR' = 'es-AR',
 }
 
 export enum ENVIRONMENT {

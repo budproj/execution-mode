@@ -49,6 +49,11 @@ export const LocaleSwitcherWrapper = ({
         code: 'en-US',
         label: intl.formatMessage(messages.enUSLabel),
       },
+
+      'es-AR': {
+        code: 'es-AR',
+        label: intl.formatMessage(messages.esARLabel),
+      },
     }),
     [intl],
   )

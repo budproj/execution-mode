@@ -2,6 +2,7 @@ import differenceInDays from 'date-fns/differenceInDays'
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import enUS from 'date-fns/locale/en-US'
+import es from 'date-fns/locale/es'
 import ptBR from 'date-fns/locale/pt-BR'
 import { useCookies } from 'react-cookie'
 import { useIntl } from 'react-intl'
@@ -13,6 +14,7 @@ import messages from './messages'
 const userLanguage = new Map([
   ['pt-BR', ptBR],
   ['en-US', enUS],
+  ['es-AR', es],
 ])
 
 export const useGetLastAccess = (lastAccess?: string) => {
