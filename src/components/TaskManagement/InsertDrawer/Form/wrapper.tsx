@@ -7,14 +7,15 @@ import { useRecoilValue } from 'recoil'
 import * as Yup from 'yup'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
-import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
+import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
+import { TaskUpdate } from 'src/services/task-management/@types/task-update.type'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import meAtom from 'src/state/recoil/user/me'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
 
 import { FormActions } from './actions'
+import { CycleInput } from './cycle'
 import { DescriptionInput } from './description'
 import { DueDateInput } from './due-date'
 import { KeyResultInput } from './key-result'
@@ -27,7 +28,7 @@ import { TitleInput } from './title'
 export type FormValues = {
   teamId?: string
   keyResult?: string
-  cycle?: string
+  cycle: string
   title: string
   priority: TaskPriority
   description: string
@@ -78,9 +79,10 @@ const InsertOrUpdateTaskForm = ({
   const NewTaskSchema = Yup.object().shape({
     title: Yup.string().required(intl.formatMessage(messages.titleRequiredText)),
     keyResult: Yup.string(),
+    cycle: Yup.string().required(),
     priority: Yup.string().required(),
     description: Yup.string(),
-    initialDate: Yup.date(),
+    initialDate: Yup.date().required(),
     dueDate: Yup.date()
       .min(Yup.ref('initialDate'), intl.formatMessage(messages.dueDateBeforeInitialDateText))
       .max(new Date(2100, 11, 31), intl.formatMessage(messages.dueDateAfter2030Text))
@@ -96,6 +98,7 @@ const InsertOrUpdateTaskForm = ({
     title: '',
     priority: 4,
     keyResult: '',
+    cycle: '',
     initialDate: new Date(),
     dueDate: new Date(),
     description: ' ',
@@ -212,6 +215,7 @@ const InsertOrUpdateTaskForm = ({
                 isLoading={isLoading}
               />
               <KeyResultInput isLoading={isLoading} />
+              <CycleInput isLoading={isLoading} />
               <PriorityInput isLoading={isLoading} />
               <DescriptionInput
                 isLoading={isLoading}

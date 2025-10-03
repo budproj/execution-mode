@@ -1,46 +1,13 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { AxiosInstance } from 'axios'
 
+import { NewTask } from 'src/components/Task/types'
 import { Except } from 'src/helpers/except'
 
-export enum TASK_STATUS {
-  pending = 'pending',
-  toDo = 'toDo',
-  doing = 'doing',
-  done = 'done',
-}
-
-enum BOARD_TYPE {
-  TEAM_TASKS = 'TEAM_TASKS',
-  PROJECT_TASKS = 'PROJECT_TASKS',
-}
-
-export type Task = {
-  _id: string
-  boardId: string
-  status: TASK_STATUS
-  title: string
-  description: string
-  dueDate: Date
-  priority: number
-  owner: string
-  initialDate: Date
-  attachments: string[]
-  supportTeamMembers: string[]
-  tags: string[]
-  createdAt: Date
-  updatedAt: Date
-  active?: boolean
-}
-
-export type TaskUpdate = {
-  _id: string
-  taskId: string
-  oldState: ITaskStateInterface
-  patches: ITaskPatchInterface[]
-  newState: ITaskStateInterface
-  author: IAuthor
-  createdAt: string
-}
+import { TaskComment, TaskCommentInsert } from './@types/task-comment.type'
+import { TaskUpdate } from './@types/task-update.type'
+import { Task } from './@types/task.type'
 
 export interface ITaskPatchInterface {
   key: TaskPatchsKeys
@@ -80,103 +47,78 @@ export enum IAuthorType {
   LLM = 'LLM',
 }
 
-export type TaskInsert = Except<Task, '_id' | 'createdAt' | 'updatedAt'>
-
-export type Board = {
-  _id: string
-  title?: string
-  type: BOARD_TYPE
-  teamsIds?: string[]
-  tasks: Task[]
-  order: {
-    pending: string[]
-    toDo: string[]
-    doing: string[]
-    done: string[]
-  }
-  createdAt: Date
-  updateadAt: Date
-}
-
-type GetTeamBoardInput = {
-  teamId: string
-  archived?: boolean
-}
+export type TaskInsert = Except<NewTask, 'id' | 'createdAt' | 'updatedAt' | 'history'>
 
 export class TaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
-  async getTeamBoard({ teamId, archived }: GetTeamBoardInput) {
-    const { data } = await this.client.get<GetTeamBoardOutput>(`boards`, {
+  async getAllTasks(parameters: ParsedUrlQuery) {
+    /* 
+      Accepted parameters 
+      1. kr: Filter Key Result by id
+      2. cycle: Filter cicle by id
+      3. last: "last <0-100>" filter date by last x days
+      4. since/upto: since + Date define start date, upto + Date define end
+    */
+
+    const { data: response } = await this.client.get<Task[]>(`api/task-manager/task`, {
       params: {
-        teamId,
-        archived,
+        team_id: parameters.team_id,
+        deleted_at: parameters.deleted_at,
+        key_result_id: parameters.key_result_id,
+        cy: parameters.cy,
+        show_done: parameters.show_done,
       },
     })
-    return data
+    return response
   }
 
-  async updateBoardOrder(boardId: Board['_id'], column: TASK_STATUS, order: string[]) {
-    if (!boardId) {
-      throw new Error('A id is required to update task')
-    }
-
-    const { data: response } = await this.client.patch<Board>(`boards/${boardId}/order`, {
-      column,
-      order,
-    })
-
+  async getTask(id: Task['id']) {
+    const { data: response } = await this.client.get<Task>(`api/task-manager/task/${id}`)
     return response
   }
 
   async addTask(data: TaskInsert) {
-    const { data: response } = await this.client.post<Task>(`tasks`, data)
+    const { data: response } = await this.client.post<NewTask>(`api/task-manager/task`, data)
     return response
   }
 
-  async updateTask(data: Partial<Task>) {
-    if (!data._id) {
+  async removeTask(id: Task['id']) {
+    await this.client.delete<NewTask>(`api/task-manager/task/${id}`)
+  }
+
+  async updateTask(id: Task['id'], data: Partial<TaskUpdate>) {
+    if (!id) {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.patch<Task>(`tasks/${data._id}`, data)
+    const { data: response } = await this.client.patch<Task>(`api/task-manager/task/${id}`, data)
 
     return response
   }
 
-  async getTask(id: Task['_id']) {
-    const { data: response } = await this.client.get<Task>(`tasks/`, {
-      params: {
-        id,
-      },
-    })
+  async addTaskComment(data: TaskCommentInsert) {
+    const { data: response } = await this.client.post<TaskComment>(
+      `task-management/task/comments`,
+      data,
+    )
 
     return response
   }
 
-  async getTaskUpdates(data: string | undefined) {
-    if (!data) {
-      throw new Error('A id is required to get task updates')
-    }
-
-    const { data: response } = await this.client.get<TaskUpdate[]>(`task-updates/task/${data}`)
+  async getTaskComments(id: Task['id']) {
+    const { data: response } = await this.client.get<TaskComment[]>(
+      `task-management/task/comments/${id}`,
+    )
 
     return response
   }
 
-  async removeTask(id: string) {
-    await this.client.delete<Task>(`tasks/${id}`)
-  }
+  async removeTaskComments(id: TaskComment['id']) {
+    const { data: response } = await this.client.delete<TaskComment>(
+      `task-management/task/comments/${id}`,
+    )
 
-  async archiveColumn(ids: string[]) {
-    await this.client.patch(`tasks/id/archive`, {
-      ids,
-    })
-  }
-
-  async deleteColumn(ids: string[]) {
-    await this.client.delete(`tasks/id/delete`, { data: { ids } })
+    return response
   }
 }
-
-type GetTeamBoardOutput = Board

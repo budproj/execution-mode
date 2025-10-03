@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import { Accordion } from 'src/components/Base/Accordion'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResultChecklist } from 'src/components/KeyResult/Single/Sections/Checklist/checklist'
-import { KeyResultWithTasks } from 'src/services/okr/key-result/@types'
+import { KeyResultWithTasks } from 'src/services/key-result/@types'
 
 import messages from './messages'
 

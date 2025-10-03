@@ -1,5 +1,5 @@
 import { User } from 'src/components/User/types'
-import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
 
 import { GraphQLConnection, GraphQLNode, GraphQLEntityPolicy } from '../types'
 
@@ -18,7 +18,7 @@ export interface Task extends GraphQLNode {
 
 export interface NewTask {
   id: string
-  key_result?: string | undefined
+  keyResult?: string | undefined
   orderindex: number
   status: TASK_STATUS
   initialDate: Date

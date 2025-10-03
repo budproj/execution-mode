@@ -6,14 +6,14 @@ import { ServicesContext } from 'src/components/Base/ServicesProvider/services-p
 const MODULE = 'KeyResult'
 const ACTION = 'getAllTeamKR'
 
-export function useTeamKRData(teamId: string, objectiveId: string) {
+export function useTeamKRData(teamId: string, cycleFilter: string) {
   const { servicesPromise } = useContext(ServicesContext)
 
   const query = useQuery({
-    queryKey: [`${MODULE}:${ACTION}:${teamId}`],
+    queryKey: [`${MODULE}:${ACTION}:${teamId}`, cycleFilter],
     queryFn: async () => {
       const { keyResult } = await servicesPromise
-      const data = await keyResult.getKeyResultTeam(teamId, objectiveId)
+      const data = await keyResult.getKeyResultTeam(teamId, cycleFilter)
       return data
     },
   })

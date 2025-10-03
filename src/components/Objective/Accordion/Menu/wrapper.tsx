@@ -14,10 +14,14 @@ import { teamAtomFamily } from '../../../../state/recoil/team'
 import { GraphQLEffect } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
+import { useCycleByCompany } from './hooks/get-company-cycles-by-team'
+import { useTeamByCompany } from './hooks/get-company-teams-by-team'
 import messages from './messages'
-import { CreateKeyResultOption } from './option-create-key-result'
-import { DeleteObjectiveOption } from './option-delete-objective'
-import { UpdateObjectiveOption } from './option-update-objective'
+import { CreateKeyResultOption } from './options/option-create-key-result'
+import { DeleteObjectiveOption } from './options/option-delete-objective'
+import { UpdateObjectiveOption } from './options/option-update-objective'
+import { UpdateObjectiveCycleOption } from './options/option-update-objective-cycle'
+import { UpdateObjectiveTeamOption } from './options/option-update-objective-team'
 
 interface ObjectiveAccordionMenuProperties {
   teamID?: Team['id']
@@ -45,10 +49,17 @@ export const ObjectiveAccordionMenu = ({
   const canCreateKeyResult = policyHolder?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
   // Const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
-  const canDeleteObjective = userAuthzRole?.name !== AuthzUserRoles.teamMember
+  const canDeleteObjective = userAuthzRole?.name !== AuthzUserRoles.teamMember || isPersonalOkr
+  const isOwner = userID === myID && objective?.owner?.id === userID
+  const hasManagementRole = userAuthzRole?.name !== AuthzUserRoles.teamMember || isOwner
   const hasAnyOptions = isPersonalOkr
     ? userID === myID
     : !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
+
+  const teamId = teamID ?? objective?.teamId ?? team?.id
+
+  const { data: teamList } = useTeamByCompany(teamId)
+  const { data: cycleList } = useCycleByCompany(teamId)
 
   return (
     <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>
@@ -79,6 +90,16 @@ export const ObjectiveAccordionMenu = ({
           {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
           {canDeleteObjective && (
             <DeleteObjectiveOption objectiveID={objectiveID} userID={userID} teamID={teamID} />
+          )}
+          {canUpdateObjective && hasManagementRole && !isPersonalOkr && objectiveID && (
+            <>
+              <UpdateObjectiveTeamOption objectiveId={objectiveID} value={teamId} data={teamList} />
+              <UpdateObjectiveCycleOption
+                objectiveId={objectiveID}
+                value={objective.cycle?.id}
+                data={cycleList}
+              />
+            </>
           )}
         </MenuList>
       </Menu>

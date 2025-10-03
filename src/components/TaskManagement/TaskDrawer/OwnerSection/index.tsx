@@ -6,12 +6,13 @@ import KeyResultSectionOwner from 'src/components/KeyResult/Single/Sections/Owne
 import { KeyResultAvailableOwners } from 'src/components/KeyResult/Single/Sections/Owner/user-list'
 import { SupportTeamField } from 'src/components/TaskManagement/TaskDrawer/SupportTeamField'
 import { User } from 'src/components/User/types'
-import { TASK_STATUS as ColumnType } from 'src/services/new-task-management/@types/task-status.enum'
-import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { TASK_STATUS as ColumnType } from 'src/services/task-management/@types/task-status.enum'
+import { TaskUpdate } from 'src/services/task-management/@types/task-update.type'
+import { Task } from 'src/services/task-management/@types/task.type'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
-import { TASK_UPDATES_DATA_KEY } from '../../hooks/use-get-task-updates'
+
+export const TASK_UPDATES_DATA_KEY = 'task-updates-data'
 
 interface KeyResultSingleSectionOwnerWrapperProperties {
   readonly ownerId?: string

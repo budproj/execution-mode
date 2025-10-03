@@ -11,8 +11,10 @@ type KeyResultListBodyColumnActionsMessage =
   | 'deleteButtonMessage'
   | 'successfulCopyMessage'
   | 'copyButtonMessage'
+  | 'transferButtonMessage'
   | 'optionsButtonDesc'
   | 'editButtonLabelMessage'
+  | 'updateKeyResultObjectiveSucessToastMessage'
 
 export default defineMessages<KeyResultListBodyColumnActionsMessage>({
   deleteIconDesc: {
@@ -71,6 +73,11 @@ export default defineMessages<KeyResultListBodyColumnActionsMessage>({
     id: 'AO/RyT',
     description: 'This message appears in the button that copies the title of the key result',
   },
+  transferButtonMessage: {
+    defaultMessage: 'Mover este Resultado-Chave para outro objetivo',
+    id: 'PWVeP0',
+    description: 'This message appears in the button that copies the title of the key result',
+  },
   successfulCopyMessage: {
     defaultMessage: 'Título copiado com sucesso.',
     id: 'VFj8OD',
@@ -87,5 +94,11 @@ export default defineMessages<KeyResultListBodyColumnActionsMessage>({
     defaultMessage: 'Editar este Resultado-Chave',
     id: 'r2E/o2',
     description: 'This button allow the user edit the Key Result.',
+  },
+
+  updateKeyResultObjectiveSucessToastMessage: {
+    defaultMessage: 'O Resultado-Chave foi movido de objetivo com sucesso.',
+    id: 'd3sTZR',
+    description: 'This message appears on a successful toast when update objective team.',
   },
 })

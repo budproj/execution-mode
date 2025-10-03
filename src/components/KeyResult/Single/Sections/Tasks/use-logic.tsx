@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import { useTeamTasksData } from 'src/components/TaskManagement/hooks/new-task/use-get-team-tasks'
-import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { useTeamTasksData } from 'src/components/TaskManagement/hooks/use-get-team-tasks'
+import { TASK_STATUS } from 'src/services/task-management/@types/task-status.enum'
+import { Task } from 'src/services/task-management/@types/task.type'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
@@ -34,7 +34,7 @@ export const useLogic = ({ keyResultID }: useLogicProperties) => {
     isFetching,
     isSuccess,
     refetch,
-  } = useTeamTasksData({ key_result_id__id: keyResultID } as ParsedUrlQuery)
+  } = useTeamTasksData({ key_result_id: keyResultID } as ParsedUrlQuery)
 
   // Refetch tasks after creation
   const handleChecklistCreation = () => {

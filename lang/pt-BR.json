@@ -355,6 +355,10 @@
     "defaultMessage": "Que bom te ver novamente, {name}! :)",
     "description": "The page title that our users should see in the dashboard page"
   },
+  "3LGCOy": {
+    "defaultMessage": "Espanhol",
+    "description": "This message is used as the label for the espanish language in our locale switcher"
+  },
   "3MleM/": {
     "defaultMessage": "Tornar time principal?",
     "description": "The label of the button that makes the team the main team"
@@ -466,6 +470,10 @@
   "4uGYvu": {
     "defaultMessage": "Clima dos Times {companypreposition} {company}",
     "description": "Title of the metrics card"
+  },
+  "4xiLc/": {
+    "defaultMessage": "Espanhol",
+    "description": "The user locale es-AR option while creating a new workspace"
   },
   "53vwrZ": {
     "defaultMessage": "Este resultado-chave ainda é um rascunho",
@@ -811,6 +819,10 @@
     "defaultMessage": "comentou no seu resultado-chave:",
     "description": "This message is displayed to describe a notification that occurs when someone comments on a user`s KR."
   },
+  "AjIgUB": {
+    "defaultMessage": "Pesquise ou selecione na lista o {option} que deseja vincular esse OKR",
+    "description": "This message appears on update modal body."
+  },
   "AngG7m": {
     "defaultMessage": "{today, select, true {hoje às} false {às} other {às}}",
     "description": "The prefix of the hour description"
@@ -970,6 +982,10 @@
   "DHoDPU": {
     "defaultMessage": "Salvar",
     "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawers"
+  },
+  "DIQdct": {
+    "defaultMessage": "O objetivo foi movido de ciclo com sucesso.",
+    "description": "This message appears on a successful toast when update objective team."
   },
   "DRKiQR": {
     "defaultMessage": "Parabéns! Você completou este resultado chave.",
@@ -1291,6 +1307,10 @@
     "defaultMessage": "para <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
   },
+  "IldkUk": {
+    "defaultMessage": "Filtros",
+    "description": "This is the default placeholder while selecting a given value in a select menu"
+  },
   "IoZbDV": {
     "defaultMessage": "Deseja excluir esse comentário?",
     "description": "This message appears in delete modal confirmation."
@@ -1426,6 +1446,10 @@
   "KdYFbe": {
     "defaultMessage": "Apagar",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
+  },
+  "KlhDYs": {
+    "defaultMessage": "Mover este OKR para outro Ciclo",
+    "description": "This is the fourth option that appears when you open the menu of a given objective inside the accordion button"
   },
   "L/b/G/": {
     "defaultMessage": "Um desenho de uma pasta aberta sem nada dentro",
@@ -1714,6 +1738,10 @@
   "PSCS+h": {
     "defaultMessage": "Nome",
     "description": "The label of the first name field in the create user form"
+  },
+  "PWVeP0": {
+    "defaultMessage": "Mover este Resultado-Chave para outro objetivo",
+    "description": "This message appears in the button that copies the title of the key result"
   },
   "PYLIcI": {
     "defaultMessage": "Meta",
@@ -2498,6 +2526,10 @@
   "cz6EUM": {
     "defaultMessage": "Foto",
     "description": "The label of the picture field in the create user form"
+  },
+  "d3sTZR": {
+    "defaultMessage": "O Resultado-Chave foi movido de objetivo com sucesso.",
+    "description": "This message appears on a successful toast when update objective team."
   },
   "d62Bt/": {
     "defaultMessage": "Ícone de um balão de fala",
@@ -3503,6 +3535,10 @@
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "urN1WV": {
+    "defaultMessage": "Alterar o {type} deste OKR",
+    "description": "This message appears on update modal title."
+  },
   "usAoP+": {
     "defaultMessage": "Trimestral",
     "description": "This option makes an cycle with quarterly cadence"
@@ -3567,6 +3603,10 @@
     "defaultMessage": "Feminino",
     "description": "The user gender female option while creating a new workspace"
   },
+  "vnjJt9": {
+    "defaultMessage": "Mover este OKR para outro Time",
+    "description": "This is the fourth option that appears when you open the menu of a given objective inside the accordion button"
+  },
   "vqeE5J": {
     "defaultMessage": "Lembretes de rotina",
     "description": "Description for routine notification settings modal icon"
@@ -3627,6 +3667,10 @@
     "defaultMessage": "Buscar membros",
     "description": "This message is used in the search input while searching for users"
   },
+  "ws7tAT": {
+    "defaultMessage": "O objetivo foi movido de time com sucesso.",
+    "description": "This message appears on a successful toast when update objective team."
+  },
   "wsXNFt": {
     "defaultMessage": "Responder",
     "description": "This message appears as a label on the button used to reply to a comment."
@@ -3674,6 +3718,10 @@
   "xPoUwI": {
     "defaultMessage": "Um desenho de uma engrenagem para o botão de edição de time",
     "description": "The gear icon description"
+  },
+  "xSSnsF": {
+    "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde.",
+    "description": "This message appears on a error toast when update objective team."
   },
   "xVR0F1": {
     "defaultMessage": "Apelido",

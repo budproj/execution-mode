@@ -9,6 +9,7 @@ import {
   Spinner,
   StyleProps,
   BoxProps,
+  Text,
 } from '@chakra-ui/react'
 import React, { ReactElement, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
@@ -118,7 +119,15 @@ const SelectMenu = ({
         transition="none"
         {...rest}
       >
-        {valueLabel ?? placeholder}
+        <Text
+          textOverflow="ellipsis"
+          maxWidth="100%"
+          whiteSpace="nowrap"
+          overflow="hidden"
+          display="block"
+        >
+          {valueLabel ?? placeholder}
+        </Text>
       </MenuButton>
       <MenuList
         boxShadow="with-stroke.light"

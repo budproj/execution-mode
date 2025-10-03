@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TaskComment } from 'src/services/new-task-management/@types/task-comment.type'
+import { TaskComment } from 'src/services/task-management/@types/task-comment.type'
 
 import TaskTimelineCardComment from '../Card'
 

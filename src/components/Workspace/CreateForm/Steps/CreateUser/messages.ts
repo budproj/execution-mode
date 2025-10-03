@@ -18,6 +18,7 @@ type CreateUserMessage =
   | 'userLocalePTBROption'
   | 'userLocaleENUSOption'
   | 'userAutoInviteLabel'
+  | 'userLocaleESAROption'
 
 export default defineMessages<CreateUserMessage>({
   userFirstNameLabel: {
@@ -114,6 +115,12 @@ export default defineMessages<CreateUserMessage>({
     defaultMessage: 'Inglês',
     id: 'loTYpj',
     description: 'The user locale en-US option while creating a new workspace',
+  },
+
+  userLocaleESAROption: {
+    defaultMessage: 'Espanhol',
+    id: '4xiLc/',
+    description: 'The user locale es-AR option while creating a new workspace',
   },
 
   userAutoInviteLabel: {

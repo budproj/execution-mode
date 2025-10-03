@@ -2,8 +2,8 @@ import { Box, Flex } from '@chakra-ui/react'
 import orderBy from 'lodash/orderBy'
 import React from 'react'
 
-import { TaskComment } from 'src/services/new-task-management/@types/task-comment.type'
-import { TaskHistory } from 'src/services/new-task-management/@types/task-history.type'
+import { TaskComment } from 'src/services/task-management/@types/task-comment.type'
+import { TaskHistory } from 'src/services/task-management/@types/task-history.type'
 
 import { TaskCommentComponent } from './TaskComment'
 import { TaskUpdateComponent } from './TaskUpdate'

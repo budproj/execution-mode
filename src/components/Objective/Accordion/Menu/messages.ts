@@ -5,12 +5,17 @@ type ObjectiveAccordionMenuMessage =
   | 'firstMenuOption'
   | 'secondMenuOption'
   | 'thirdMenuOption'
+  | 'fourthMenuOption'
+  | 'fifthMenuOption'
   | 'deleteDialogKeyword'
   | 'deleteObjectiveFirstStageTitle'
   | 'deleteObjectiveFirstStageDescription'
   | 'deleteDialogConfirmationLabel'
   | 'deleteObjectiveSuccessToastMessage'
   | 'deleteObjectiveErrorToastMessage'
+  | 'updateObjectiveSucessToastTeamMessage'
+  | 'updateObjectiveSucessToastCycleMessage'
+  | 'updateObjectiveErrorToastMessage'
 
 export default defineMessages<ObjectiveAccordionMenuMessage>({
   optionsButtonIconDesc: {
@@ -39,6 +44,20 @@ export default defineMessages<ObjectiveAccordionMenuMessage>({
     id: 'PmauyJ',
     description:
       'This is the third option that appears when you open the menu of a given objective inside the accordion button',
+  },
+
+  fourthMenuOption: {
+    defaultMessage: 'Mover este OKR para outro Time',
+    id: 'vnjJt9',
+    description:
+      'This is the fourth option that appears when you open the menu of a given objective inside the accordion button',
+  },
+
+  fifthMenuOption: {
+    defaultMessage: 'Mover este OKR para outro Ciclo',
+    id: 'KlhDYs',
+    description:
+      'This is the fourth option that appears when you open the menu of a given objective inside the accordion button',
   },
 
   deleteDialogKeyword: {
@@ -77,5 +96,23 @@ export default defineMessages<ObjectiveAccordionMenuMessage>({
     id: 'SDzYq9',
     description:
       'This message appears when the user tries to remove a given objective, but receives an error',
+  },
+
+  updateObjectiveSucessToastTeamMessage: {
+    defaultMessage: 'O objetivo foi movido de time com sucesso.',
+    id: 'ws7tAT',
+    description: 'This message appears on a successful toast when update objective team.',
+  },
+
+  updateObjectiveSucessToastCycleMessage: {
+    defaultMessage: 'O objetivo foi movido de ciclo com sucesso.',
+    id: 'DIQdct',
+    description: 'This message appears on a successful toast when update objective team.',
+  },
+
+  updateObjectiveErrorToastMessage: {
+    defaultMessage: 'Desculpe, mas houve um erro inesperado. Tente novamente mais tarde.',
+    id: 'xSSnsF',
+    description: 'This message appears on a error toast when update objective team.',
   },
 })

@@ -13,7 +13,7 @@ export function useTeamCycleData(teamId: string) {
     queryKey: [`${MODULE}:${ACTION}:${teamId}`],
     queryFn: async () => {
       const { cycle } = await servicesPromise
-      const data = await cycle.getCycleTeam(teamId)
+      const data = await cycle.getTeamCycle(teamId)
       return data
     },
   })

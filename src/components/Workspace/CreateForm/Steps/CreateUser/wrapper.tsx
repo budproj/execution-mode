@@ -22,6 +22,7 @@ export const CreateUserInWorkspaceFields = () => {
   const userLocaleHashmap = {
     [LOCALE['pt-BR']]: intl.formatMessage(messages.userLocalePTBROption),
     [LOCALE['en-US']]: intl.formatMessage(messages.userLocaleENUSOption),
+    [LOCALE['es-AR']]: intl.formatMessage(messages.userLocaleENUSOption),
   }
 
   const handleFieldChange = (field: string) => (newGender: string | string[]) => {
@@ -103,6 +104,9 @@ export const CreateUserInWorkspaceFields = () => {
           </MenuItemOption>
           <MenuItemOption value={LOCALE['en-US']}>
             {userLocaleHashmap[LOCALE['en-US']]}
+          </MenuItemOption>
+          <MenuItemOption value={LOCALE['es-AR']}>
+            {userLocaleHashmap[LOCALE['es-AR']]}
           </MenuItemOption>
         </SelectMenu>
       </Box>
