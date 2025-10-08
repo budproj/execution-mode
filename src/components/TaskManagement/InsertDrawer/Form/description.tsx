@@ -54,7 +54,7 @@ export const DescriptionInput = ({
   }
 
   return (
-    <FormInputBase required>
+    <FormInputBase required title="descrição">
       <Skeleton isLoaded={!isLoading}>
         <InputGroup onBlurCapture={handleBlur} onFocusCapture={handleFocus}>
           <Field
