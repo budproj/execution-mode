@@ -45,7 +45,7 @@ export const CycleInput = ({ isLoading }: CycleInputProperties) => {
   }
 
   return (
-    <FormInputBase title="Ciclo">
+    <FormInputBase required title="Ciclo">
       <Skeleton isLoaded={!isLoading}>
         <SelectMenu
           matchWidth
