@@ -182,7 +182,6 @@ const InsertOrUpdateTaskForm = ({
       owner: allValues.owner,
       dueDate: addHours(new Date(allValues.dueDate), 3).toISOString(),
       initialDate: addHours(new Date(allValues.initialDate), 3).toISOString(),
-      supportTeam: [],
     }
 
     const newTask = getUpdatePatches(taskDrawer as TaskUpdate, variables as unknown as TaskUpdate)
