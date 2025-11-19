@@ -3866,5 +3866,17 @@
   "3LGCOy": {
     "defaultMessage": "Español",
     "description": "This message is used as the label for the espanish language in our locale switcher"
+  },
+  "cSm/iv": {
+    "defaultMessage": "¡El éxito no tiene fronteras! Ya está disponible la traducción al español y nuevas mejoras para usted.",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
+  },
+  "ik/N/l": {
+    "defaultMessage": "Ahora con traducción completa al español, lo que facilita la gestión de OKR para todos, y filtros de tareas mejorados para que puedas centrarte al instante en lo que realmente importa :)",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
+  },
+  "DM6HaV": {
+    "defaultMessage": "¡Nuevo!",
+    "description": "This message is used as the label for the news banner tag"
   }
 }

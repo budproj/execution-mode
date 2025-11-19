@@ -227,10 +227,6 @@
     "defaultMessage": "Na última hora",
     "description": "This label is displayed if the date difference is less than 1 hour"
   },
-  "1EdvvO": {
-    "defaultMessage": "Agora você pode fazer a gestão das atividades da rotina do seu time também na bud. Visite a página do seu time e explore a aba de tarefas! Crie tarefas e acompanhe o andamento dos seus projetos em um só lugar :)",
-    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
-  },
   "1IAVGz": {
     "defaultMessage": "Tarefas pendentes",
     "description": "Label for pending tasks selector item"
@@ -986,6 +982,10 @@
   "DIQdct": {
     "defaultMessage": "O objetivo foi movido de ciclo com sucesso.",
     "description": "This message appears on a successful toast when update objective team."
+  },
+  "DM6HaV": {
+    "defaultMessage": "Novidade!",
+    "description": "This message is used as the label for the news banner tag"
   },
   "DRKiQR": {
     "defaultMessage": "Parabéns! Você completou este resultado chave.",
@@ -2291,10 +2291,6 @@
     "defaultMessage": "Nome",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
   },
-  "Y0d9br": {
-    "defaultMessage": "Organize suas atividades no novo módulo de gestão de tarefas!",
-    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
-  },
   "Y1oyYG": {
     "defaultMessage": "Um ícone de seta para cima, indicando que o progresso aumentou",
     "description": "This desc message explains the increase icon for screen readers"
@@ -2510,6 +2506,10 @@
   "cRj0sI": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
     "description": "This message appears when the user tries to remove a given key-result, but receives an error"
+  },
+  "cSm/iv": {
+    "defaultMessage": "¡El éxito no tiene fronteras! Chegou a Tradução para Espanhol e Novas Melhorias para Você.",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
   },
   "cVQ/Xo": {
     "defaultMessage": "Time",
@@ -2882,6 +2882,10 @@
   "ijCibq": {
     "defaultMessage": "Financeiro (Dólar)",
     "description": "This message is displayed inside our key-result format select as the title of the coin USD format"
+  },
+  "ik/N/l": {
+    "defaultMessage": "Agora com tradução completa para o Espanhol, facilitando a gestão de OKRs para todos, e filtros de tarefas aprimorados para você focar instantaneamente no que realmente importa :)",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
   },
   "ivvae0": {
     "defaultMessage": "Pontos de atenção nos membros do time",
