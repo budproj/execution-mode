@@ -12,12 +12,12 @@ import {
 import React, { useCallback, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
-import bg from 'public/images/new-task-feature-2.png'
+import bg from 'public/images/bud-release-19-11.png'
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import messages from './messages'
 
-export const newsBannerStorageKey = 'newTasksFeature'
+export const newsBannerStorageKey = 'release-19-11-2025'
 
 const NewsBanner = () => {
   const intl = useIntl()
@@ -61,12 +61,19 @@ const NewsBanner = () => {
           />
           <Box width="500px" paddingTop="30px" paddingLeft="50px">
             <Tag bg="brand.500" color="white" fontSize={18} padding="3px 9px" mb="10px">
-              Novidade!
+              {intl.formatMessage(messages.newsBannerTag)}
             </Tag>
             <Text color="brand.500" fontWeight={900} textTransform="uppercase" fontSize="35px">
               {intl.formatMessage(messages.newsBannerTitle)}
             </Text>
-            <Text color="new-gray.700" fontWeight={450} fontSize="16px" marginTop="10px" mb="20px">
+            <Text
+              color="new-gray.700"
+              fontWeight={450}
+              fontSize="16px"
+              marginTop="10px"
+              mb="20px"
+              paddingRight="10px"
+            >
               {intl.formatMessage(messages.newsBannerDescription)}
             </Text>
             {/* <Button

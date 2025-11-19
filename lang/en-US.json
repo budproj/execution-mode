@@ -4358,5 +4358,17 @@
   "texterify_timestamp": {
     "defaultMessage": "2023-10-31T14:48:06Z",
     "description": ""
+  },
+  "cSm/iv": {
+    "defaultMessage": "¡El éxito no tiene fronteras! Spanish Translation and New Improvements for You Are Here.",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
+  },
+  "ik/N/l": {
+    "defaultMessage": "Now fully translated into Spanish, making OKR management easier for everyone, and improved task filters so you can instantly focus on what really matters :)",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
+  },
+  "DM6HaV": {
+    "defaultMessage": "What's New!",
+    "description": "This message is used as the label for the news banner tag"
   }
 }
