@@ -67,6 +67,8 @@ export const UpdateCycle = ({ teamId, parents, cycleId, onCancel }: UpdateCycleP
     period: cycle?.period ?? '',
     parentId: cycle?.cadence === CADENCE.YEARLY ? undefined : cycle?.parentId,
     active: cycle?.active ? CYCLE_STATUS.ACTIVE : CYCLE_STATUS.NOT_ACTIVE,
+    dateEnd: cycle?.dateEnd ? cycle?.dateEnd.split('T')[0] : '',
+    dateStart: cycle?.dateStart ? cycle?.dateStart.split('T')[0] : '',
   }
 
   return (
