@@ -81,7 +81,7 @@ export const CreateTaskButton = ({
         tags: [],
         orderindex: 0,
         keyResult: keyResultID,
-        cycle: '',
+        cycle: undefined,
       })
     }
 
